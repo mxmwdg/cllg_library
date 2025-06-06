@@ -5,12 +5,12 @@ public class Member {
     String name;
     ArrayList<Item> BorrowedItems = new ArrayList<>();
 
-    void BorrowItem(){
+    void BorrowItem(Item item){
 
     }
     //you have to save the date of borrowing/returning
 
-    void ReturnItem(){
+    void ReturnItem(Item item){
 
     }
 

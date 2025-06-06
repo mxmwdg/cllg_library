@@ -5,4 +5,5 @@ public abstract class Item {
     String topic;
 
     abstract void List();
+    abstract void Return();
 }
