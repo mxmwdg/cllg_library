@@ -8,5 +8,10 @@ public class Member {
     void BorrowItem(){
 
     }
+    //you have to save the date of borrowing/returning
+
+    void ReturnItem(){
+
+    }
 
 }
