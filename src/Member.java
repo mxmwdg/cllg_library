@@ -13,8 +13,7 @@ public class Member {
     void BorrowItem(Item item){
         if(BorrowedItems.size()<=3){
             BorrowedItems.add(item);
-            //System.out.println("here you go");
-
+            System.out.println("here you go!");
         }
         else
             System.out.println("you can't borrow more than three items." + "/n" +
@@ -26,6 +25,7 @@ public class Member {
 
     void ReturnItem(Item item){
         BorrowedItems.remove(item);
+        System.out.println("you have returned " + item.title);
     }
 
 }
