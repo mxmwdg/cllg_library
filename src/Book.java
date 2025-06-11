@@ -3,6 +3,13 @@ public class Book extends Item {
     int numOfPages;
     String publisher;
     boolean available;
+    Book(String author, int numOfPages, String publisher, boolean available){
+        this.author = author;
+        this.numOfPages = numOfPages;
+        this.publisher = publisher;
+        this.available = available;
+
+    }
 
     @Override
     void List(){
