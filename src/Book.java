@@ -2,7 +2,7 @@ public class Book extends Item {
     String author;
     int numOfPages;
     String publisher;
-    boolean available;
+
 
     @Override
     void List(){
@@ -12,4 +12,11 @@ public class Book extends Item {
     void Return(){
 
     }
+//    public static boolean IsAvailable(){
+//
+//        if(super.available)
+//            return true;
+//        else
+//            return false;
+//    }
 }

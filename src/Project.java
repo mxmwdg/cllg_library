@@ -1,7 +1,7 @@
 public class Project extends Item {
     int projectYear;
     String[] team;
-    boolean available;
+
 
     @Override
     void List(){
@@ -11,4 +11,12 @@ public class Project extends Item {
     void Return(){
 
     }
+
+//    public boolean IsAvailable(){
+//
+//       if(super.available)
+//           return true;
+//       else
+//           return false;
+//    }
 }

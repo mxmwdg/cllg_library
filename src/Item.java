@@ -3,7 +3,14 @@ public abstract class Item {
     String title;
     int yearOfPublishing;
     String topic;
+    public boolean available;
 
     abstract void List();
     abstract void Return();
+    boolean IsAvaialble(){
+        if(this.available)
+            return true;
+        else
+            return false;
+    }
 }
