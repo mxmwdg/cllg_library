@@ -17,6 +17,6 @@ public class Book extends Item {
     }
     @Override
     void Return(){
-
+    available=true;
     }
 }

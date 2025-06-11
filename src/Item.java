@@ -1,8 +1,8 @@
 public abstract class Item {
-    int id;
-    String title;
-    int yearOfPublishing;
-    String topic;
+    public int id;
+    public String title;
+    public int yearOfPublishing;
+    public String topic;
 
 
 
