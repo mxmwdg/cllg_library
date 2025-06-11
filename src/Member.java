@@ -25,7 +25,7 @@ public class Member {
     //you have to save the date of borrowing/returning
 
     void ReturnItem(Item item){
-
+        BorrowedItems.remove(item);
     }
 
 }
