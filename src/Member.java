@@ -14,7 +14,8 @@ public class Member {
         this.name = name;
     }
     void BorrowItem(Item item, Date dateOfBorrowing){
-       /*, int day, int month,int year
+       /*the following comment can be used in the library class*********/
+        /*, int day, int month,int year
        if(BorrowedItems.size()<=3){
             BorrowedItems.add(item);
             Date date = new Date(day,month,year);
@@ -23,19 +24,18 @@ public class Member {
         else
             System.out.println("you can't borrow more than three items." + "/n" +
                                 "you have to return an item first.");*/
+
         BorrowedItems.add(item);
         DateOfBorrowing.add(dateOfBorrowing);
         numberOfBorrowedItems = numberOfBorrowedItems + 1;
 
     }
-    //you have to save the date of borrowing/returning
 
-    /**you can make more hard by making multiple borrows/returns at the same time possible**/
+    /**you can make it more hard by making multiple borrows/returns at the same time possible**/
+
     void ReturnItem(Item item, Date dateOfReturning){
         DateOfReturning.add(dateOfReturning);
         numberOfBorrowedItems = numberOfBorrowedItems - 1;
-
-        //System.out.println("you have returned: " + item.title);
     }
 
     int getNumberOfBorrowedItems(){
