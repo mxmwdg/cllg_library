@@ -15,7 +15,10 @@ public abstract class Item {
 
 
 
-    abstract void List();
+
     abstract void Return();
     abstract void borrow();
+
+    public boolean IsAvaialble() {
+    }
 }
