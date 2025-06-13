@@ -19,5 +19,7 @@ public class Book extends Item {
     available=true;
     }
      void borrow(){
+         available=false;
+
      };
 }
