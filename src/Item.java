@@ -3,7 +3,7 @@ public abstract class Item {
     String title;
     int yearOfPublishing;
     String topic;
-    public boolean available;
+    public boolean available = true;
 
     abstract void List();
     abstract void Return();
