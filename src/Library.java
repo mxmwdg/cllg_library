@@ -9,9 +9,9 @@ public class Library {
     public Library() {
     }
 
-    public Library(ArrayList<Item> listOfItems , ArrayList<Member> list0fmembers ){
+    public Library(ArrayList<Item> listOfItems , ArrayList<Member> list0fMembers ){
         this.listOfItems = listOfItems;
-        this.listOfMembers=list0fmembers;
+        this.listOfMembers=list0fMembers;
     }
 
     void RegisterItem(Item item ) {
@@ -24,7 +24,7 @@ public class Library {
 
 
     void ItemGotBorrowed(Item item ){
-        boolean Av = item.IsAvaialble();
+        boolean Av = item.IsAvailable();
         if (!Av)
             System.out.println("Sorry This Book Is Unavailable");
         else {
