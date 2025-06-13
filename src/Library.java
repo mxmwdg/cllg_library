@@ -24,7 +24,7 @@ public class Library {
 
 
     void ItemGotBorrowed(Item item ){
-        boolean Av = item.IsAvailable();
+        boolean Av = item.IsAvaialble();
         if (!Av)
             System.out.println("Sorry This Book Is Unavailable");
         else {
