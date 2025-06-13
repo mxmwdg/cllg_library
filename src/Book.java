@@ -2,7 +2,16 @@ public class Book extends Item {
     String author;
     int numOfPages;
     String publisher;
+    boolean available;
 
+    Book(int id , String title , int YearOfPublishing , String topic ,String author, int numOfPages, String publisher, boolean available){
+        super(id,title,YearOfPublishing,topic);
+        this.author = author;
+        this.numOfPages = numOfPages;
+        this.publisher = publisher;
+        this.available = available;
+
+    }
 
     @Override
     void List(){
@@ -10,13 +19,8 @@ public class Book extends Item {
     }
     @Override
     void Return(){
-
+    available=true;
     }
-//    public static boolean IsAvailable(){
-//
-//        if(super.available)
-//            return true;
-//        else
-//            return false;
-//    }
+     void borrow(){
+     };
 }

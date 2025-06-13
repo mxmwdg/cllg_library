@@ -47,4 +47,12 @@ public class Library {
 
     }
 
+    void SearchForAnItem(int optionNumber){}
+
+    void SearchForCertainMembers(int optionNumber){
+        //imo we make the main class describe the search method, and we ask for user input to decide what to do.
+    }
+
+
+
 }
