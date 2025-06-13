@@ -12,10 +12,9 @@ public abstract class Item {
         this.topic = topic;
         this.available = available;
     }
-
-
-
-
     abstract void Return();
     abstract void borrow();
+
+    public boolean IsAvaialble() {
+    }
 }
