@@ -1,16 +1,37 @@
+import javax.tools.JavaCompiler;
 import java.util.ArrayList;
+import java.util.Date;
+
 public class Library {
     ArrayList<Item> listOfItems = new ArrayList<>();
     ArrayList<Member> listOfMembers = new ArrayList<>();
 
-    void RegisterItem(){
-
+    public Library() {
     }
-    void RegisterMember(){
 
+    public Library(ArrayList<Item> listOfItems , ArrayList<Member> list0fmembers ){
+        this.listOfItems = listOfItems;
+        this.listOfMembers=list0fmembers;
     }
-    void ItemGotBorrowed(){
 
+    void RegisterItem(Item item ) {
+            listOfItems.add(item);
+    }
+
+    void RegisterMember(Member member){
+        listOfMembers.add(member);
+    }
+
+
+    void ItemGotBorrowed(Item item ){
+        boolean Av = item.IsAvaialble();
+        if (!Av)
+            System.out.println("Sorry This Book Is Unavailable");
+        else {
+            item.available = false;
+            System.out.println(item.title + " " + "is Borrowed ");
+            System.out.println("Please Enter The Date ");
+        }
     }
     void ItemGotReturned(){
 
