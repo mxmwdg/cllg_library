@@ -1,6 +1,4 @@
-import javax.tools.JavaCompiler;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Library {
     ArrayList<Item> listOfItems = new ArrayList<>();
@@ -8,9 +6,9 @@ public class Library {
     public Library() {
     }
 
-    public Library(ArrayList<Item> listOfItems , ArrayList<Member> list0fmembers ){
+    public Library(ArrayList<Item> listOfItems , ArrayList<Member> list0fMembers ){
         this.listOfItems = listOfItems;
-        this.listOfMembers=list0fmembers;
+        this.listOfMembers=list0fMembers;
     }
 
     void RegisterItem(Item item ) {
@@ -56,7 +54,7 @@ public class Library {
                     System.out.println("!! Sorry This Book Is Unavailable" + "\n" + " Please Choose Another Book");
                     break MainIf;
                 } else {
-                    item.setAvailable(false);
+                    item.setAvailable();
                     System.out.println(item.title + " " + "is Borrowed in " + dateOfBorrowing.day + '/' + dateOfBorrowing.month + '/' + dateOfBorrowing.year + " by " + member.name  + " !");
                 }
                 member.BorrowItem(item, dateOfBorrowing);
@@ -75,7 +73,7 @@ public class Library {
             break ReturningBlock;
         }
         member.ReturnItem(item ,dateOfReturning);
-        item.setAvailable(true);
+        item.setAvailable();
         System.out.println(item.title + " is returned successfully in "+ dateOfReturning.day + '/' + dateOfReturning.month + '/' + dateOfReturning.year + " by "+ member.name + " !");
     }
     }
