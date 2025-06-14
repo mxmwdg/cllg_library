@@ -32,7 +32,7 @@ public class Library {
     }
 
 
-    void ItemGotBorrowed(Member member,Item item , Date dateOfBorrowing) {
+    void ItemLend(Member member,Item item , Date dateOfBorrowing) {
         BorrowingBlock:{
             if(!listOfItems.contains(item) && !listOfMembers.contains(member)){
                 System.out.println("!! Sorry something went wrong " );
@@ -48,13 +48,13 @@ public class Library {
             }
 
             MainIf:
-            if (member.BorrowedItems.size() < 3) {
+            if (MemberIsAbleToBorrow(member)) {
                 System.out.println("Here you go!");
                 if (!item.IsAvailable()) {
                     System.out.println("!! Sorry This Book Is Unavailable" + "\n" + " Please Choose Another Book");
                     break MainIf;
                 } else {
-                    item.setAvailable();
+                    item.Return();
                     System.out.println(item.title + " " + "is Borrowed in " + dateOfBorrowing.day + '/' + dateOfBorrowing.month + '/' + dateOfBorrowing.year + " by " + member.name  + " !");
                 }
                 member.BorrowItem(item, dateOfBorrowing);
@@ -67,14 +67,17 @@ public class Library {
 
         }
     }
-    void ItemGotReturned(Member member ,Item item , Date dateOfReturning ){
+    //check if the member has the book in the first place, or he could return a book he doesn't have.
+    void ItemReturned(Member member ,Item item , Date dateOfReturning ){
         ReturningBlock:{  if(item.IsAvailable()){
             System.out.println("! The "+ item.title + " is already in the library");
             break ReturningBlock;
         }
+
         member.ReturnItem(item ,dateOfReturning);
         item.setAvailable();
         System.out.println(item.title + " is returned successfully in "+ dateOfReturning.day + '/' + dateOfReturning.month + '/' + dateOfReturning.year + " by "+ member.name + " !");
+        member.ReturnItem(item,dateOfReturning);
     }
     }
 
@@ -85,8 +88,8 @@ public class Library {
     }
 
     //3 items borrowed limiter
-    void CheckAbilityToBorrow(){
-
+    boolean MemberIsAbleToBorrow(Member member){
+        return member.getNumberOfBorrowedItems() < 3;
     }
 
     void SearchForAnItem(int optionNumber){}

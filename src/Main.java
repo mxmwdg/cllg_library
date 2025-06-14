@@ -15,11 +15,11 @@ public class Main {
 
         Member m = new Member(99,"Amin");
         l.RegisterMember(m);
-        l.ItemGotBorrowed(m,book , date1);
-        l.ItemGotReturned(m,book,date2);
-        l.ItemGotBorrowed(m,book , date2);
-//        l.ItemGotBorrowed(m,book3 , date1);
-//        l.ItemGotBorrowed(m,book4 , date1);
+        l.ItemLend(m,book , date1);
+        l.ItemLend(m,book,date2);
+        l.ItemLend(m,book , date2);
+//        l.ItemLend(m,book3 , date1);
+//        l.ItemLend(m,book4 , date1);
 
     }
 }
