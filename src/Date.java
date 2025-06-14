@@ -29,7 +29,7 @@ public class Date {
 
         return temp;
     }
-    int TimeElapsedBetweenTwoDates(Date borrowDate, Date returnDate){
+    public static int TimeElapsedBetweenTwoDates(Date borrowDate, Date returnDate){
             return returnDate.convertedDate - borrowDate.convertedDate;
     }
 }

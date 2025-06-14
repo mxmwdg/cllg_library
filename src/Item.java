@@ -5,7 +5,15 @@ public abstract class Item {
     public String topic;
     boolean available = true;
 
-    public Item(int id,String title,int yearOfPublishing,String topic,boolean available) {
+    public void setAvailable(boolean available) {
+        this.available = available;
+    }
+
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public Item(int id, String title, int yearOfPublishing, String topic, boolean available) {
         this.id = id;
         this.title = title;
         this.yearOfPublishing = yearOfPublishing;
@@ -15,10 +23,10 @@ public abstract class Item {
     abstract void Return();
     abstract void borrow();
 
-    public boolean IsAvailable() {
-        if (this.available)
-            return true;
-        else
-           return false;
-    }
+//    public boolean IsAvailable() {
+//        if (this.available)
+//            return true;
+//        else
+//           return false;
+//    }
 }
