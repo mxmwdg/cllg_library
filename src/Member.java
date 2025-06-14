@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public class Member {
     int registrationNumber;
     String name;
+
     ArrayList<Item> BorrowedItems = new ArrayList<>();
     ArrayList<Date> DateOfBorrowing = new ArrayList<>();
     ArrayList<Date> DateOfReturning = new ArrayList<>();
