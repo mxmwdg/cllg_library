@@ -20,5 +20,7 @@ public class Book extends Item {
     }
     @Override
      void borrow(){
+         available=false;
+
      };
 }

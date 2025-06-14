@@ -1,4 +1,6 @@
+import javax.tools.JavaCompiler;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Library {
     ArrayList<Item> listOfItems = new ArrayList<>();
@@ -22,7 +24,7 @@ public class Library {
 
 
     void ItemGotBorrowed(Item item ){
-        boolean Av = item.IsAvaialble();
+        boolean Av = item.IsAvailable();
         if (!Av)
             System.out.println("Sorry This Book Is Unavailable");
         else {

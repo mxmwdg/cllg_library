@@ -15,6 +15,6 @@ public abstract class Item {
     abstract void Return();
     abstract void borrow();
 
-    public boolean IsAvaialble() { return true;
+    public boolean IsAvailable() { return available;
     }
 }
