@@ -3,7 +3,7 @@ public abstract class Item {
     public String title;
     public int yearOfPublishing;
     public String topic;
-    boolean available;
+    boolean available ;
 
     public Item(int id,String title,int yearOfPublishing,String topic,boolean available) {
         this.id = id;
@@ -15,6 +15,7 @@ public abstract class Item {
     abstract void Return();
     abstract void borrow();
 
-    public boolean IsAvailable() { return available;
+    public boolean IsAvailable() {
+        return this.available;
     }
 }
