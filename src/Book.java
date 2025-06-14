@@ -5,7 +5,7 @@ public class Book extends Item {
     boolean available;
 
     Book(int id , String title , int YearOfPublishing , String topic ,String author, int numOfPages, String publisher, boolean available){
-        super(id,title,YearOfPublishing,topic);
+        super(id,title,YearOfPublishing,topic,available);
         this.author = author;
         this.numOfPages = numOfPages;
         this.publisher = publisher;
@@ -13,14 +13,13 @@ public class Book extends Item {
 
     }
 
-    @Override
-    void List(){
 
-    }
     @Override
     void Return(){
     available=true;
     }
      void borrow(){
+         available=false;
+
      };
 }

@@ -6,6 +6,7 @@ public class Member {
     ArrayList<Item> BorrowedItems = new ArrayList<>();
     ArrayList<Date> DateOfBorrowing = new ArrayList<>();
     ArrayList<Date> DateOfReturning = new ArrayList<>();
+    //for the 3 items limit, because they want the date of borrow/return. It makes so you can see each member's history.
     private int numberOfBorrowedItems = 0;
 
 
@@ -32,7 +33,7 @@ public class Member {
 
     }
 
-    /**you can make it more hard by making multiple borrows/returns at the same time possible**/
+    /**you can make it harder by making multiple borrows/returns at the same time possible**/
 
     void ReturnItem(Item item, Date dateOfReturning){
         DateOfReturning.add(dateOfReturning);

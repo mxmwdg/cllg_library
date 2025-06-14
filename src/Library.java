@@ -25,7 +25,7 @@ public class Library {
     void ItemGotBorrowed(Member member,Item item , Date date){
       MainIf:if(member.BorrowedItems.size()<3) {
           System.out.println("Here you go!");
-          boolean Av = item.IsAvaialble();
+          boolean Av = item.IsAvailable();
            if (!Av){
               System.out.println("Sorry This Book Is Unavailable"+ "\n" +" Please Choose Another Book");
               break MainIf;
