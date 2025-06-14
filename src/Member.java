@@ -13,7 +13,7 @@ public class Member {
         this.registrationNumber = registrationNumber;
         this.name = name;
     }
-    void BorrowItem(Item item, Date dateOfBorrowing){
+    void BorrowItem(Item item, Date dateOfBorrowing ){
        /*the following comment can be used in the library class*********/
         /*, int day, int month,int year
        if(BorrowedItems.size()<=3){
@@ -23,7 +23,8 @@ public class Member {
         }
         else
             System.out.println("you can't borrow more than three items." + "/n" +
-                                "you have to return an item first.");*/
+                                "you have to return an item first.");
+                                Tm BY hamza */
 
         BorrowedItems.add(item);
         DateOfBorrowing.add(dateOfBorrowing);

@@ -1,11 +1,10 @@
-import javax.tools.JavaCompiler;
+
 import java.util.ArrayList;
-import java.util.Date;
+
 
 public class Library {
     ArrayList<Item> listOfItems = new ArrayList<>();
     ArrayList<Member> listOfMembers = new ArrayList<>();
-
     public Library() {
     }
 
@@ -23,16 +22,30 @@ public class Library {
     }
 
 
-    void ItemGotBorrowed(Item item ){
-        boolean Av = item.IsAvaialble();
-        if (!Av)
-            System.out.println("Sorry This Book Is Unavailable");
-        else {
-            item.available = false;
-            System.out.println(item.title + " " + "is Borrowed ");
-            System.out.println("Please Enter The Date ");
+    void ItemGotBorrowed(Member member,Item item , Date date){
+      MainIf:if(member.BorrowedItems.size()<3) {
+          System.out.println("Here you go!");
+          boolean Av = item.IsAvaialble();
+           if (!Av){
+              System.out.println("Sorry This Book Is Unavailable"+ "\n" +" Please Choose Another Book");
+              break MainIf;
+           }
+           else {
+               item.available = false;
+               System.out.println(item.title + " " + "is Borrowed in " + date.day + '/' + date.month + '/' + date.year + " by "+ member.name);
+           }
+             member.BorrowItem(item , date);
+             //member.BorrowedItems.add(item);
+            //Date date = new Date(day,month,year);
         }
-    }
+        else
+            System.out.println("Sorry , You can't borrow more than three items." + "\n" +
+                    "You have to return an item first.");
+
+
+
+        }
+
     void ItemGotReturned(){
 
     }

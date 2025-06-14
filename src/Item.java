@@ -3,7 +3,7 @@ public abstract class Item {
     public String title;
     public int yearOfPublishing;
     public String topic;
-    boolean available;
+    boolean available = true;
 
     public Item(int id,String title,int yearOfPublishing,String topic) {
         this.id = id;
