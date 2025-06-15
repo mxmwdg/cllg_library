@@ -5,6 +5,8 @@ public class Library {
     ArrayList<Item> listOfItems = new ArrayList<>();
     ArrayList<Member> listOfMembers = new ArrayList<>();
     Scanner in = new Scanner(System.in);
+    Member currantUser;
+
     public Library() {
     }
 
@@ -40,15 +42,7 @@ public class Library {
         }
     }
     void RegisterMember(Member member){
-    if (listOfMembers.contains(member)){
-        System.out.println("! Mr ." + member.name + " is already registered in our system ");
-    }
-        else{
         listOfMembers.add(member);
-        System.out.println(member.name + " is registered successfully !");
-        System.out.println("Your registration number is: " + member.registrationNumber);
-        member.setSignedIn(true);
-    }
 }
     void SignIn(){
 
@@ -56,15 +50,17 @@ public class Library {
         String name = in.next();
         System.out.println("please enter your fucking registration number: ");
         int registrationNumber = in.nextInt();
-        Member tempMember = new Member(registrationNumber,name.toLowerCase());
+        Member currantUser = new Member(registrationNumber,name.toLowerCase());
+
+
         for(Member member: listOfMembers) {
-            if (member.equals(tempMember)) {
-                System.out.println("Hello Mr." + tempMember.name.toUpperCase());
+            if (member.equals(currantUser)) {
+                System.out.println("Hello Mr." + currantUser.name.toUpperCase());
                 member.setSignedIn(true);
-                tempMember.setSignedIn(true);
+                currantUser.setSignedIn(true);
             }
         }
-        if(!tempMember.isSignedIn()){
+        if(!currantUser.isSignedIn()){
             System.out.println("wrong sign in information, please register if you aren't a member <3 ");
         }
     }
