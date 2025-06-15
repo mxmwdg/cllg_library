@@ -4,6 +4,8 @@ import java.util.Scanner;
 public class Library {
     ArrayList<Item> listOfItems = new ArrayList<>();
     ArrayList<Member> listOfMembers = new ArrayList<>();
+
+
     Scanner in = new Scanner(System.in);
     public Library() {
     }
@@ -24,7 +26,7 @@ public class Library {
     }
 
     void RegisterMember(){
-        System.out.println("please enter your name: ");
+        System.out.println("Please enter your name : ");
         String name = in.next();
 
         Member member = new Member(name);
@@ -52,9 +54,9 @@ public class Library {
 }
     void SignIn(){
 
-        System.out.println("please enter your name: ");
+        System.out.println("Please enter your name: ");
         String name = in.next();
-        System.out.println("please enter your fucking registration number: ");
+        System.out.println("Please enter your FUCKING registration number: ");
         int registrationNumber = in.nextInt();
         Member tempMember = new Member(registrationNumber,name.toLowerCase());
         for(Member member: listOfMembers) {
@@ -65,7 +67,7 @@ public class Library {
             }
         }
         if(!tempMember.isSignedIn()){
-            System.out.println("wrong sign in information, please register if you aren't a member <3 ");
+            System.out.println("Wrong sign in information, Please register if you aren't a member <3 ");
         }
     }
 
@@ -96,8 +98,11 @@ public class Library {
                     System.out.println(item.title + " " + "is Borrowed in " + dateOfBorrowing.day + '/' + dateOfBorrowing.month + '/' + dateOfBorrowing.year + " by " + member.name  + " !");
                 }
                 member.BorrowItem(item, dateOfBorrowing);
+                item.setAvailable(false);
+
                 //member.BorrowedItems.add(item);
                 //Date date = new Date(day,month,year);
+
             } else
                 System.out.println("!! Sorry , You can't borrow more than three items." + "\n" +
                         "You have to return an item first.");
@@ -106,23 +111,33 @@ public class Library {
         }
     }
     //check if the member has the book in the first place, or he could return a book he doesn't have.
-    void ItemReturned(Member member ,Item item , Date dateOfReturning ){
+    void ItemReturned(Member member ,Item item , Date dateOfReturning  ){
         ReturningBlock:{  if(item.IsAvailable()){
             System.out.println("! The "+ item.title + " is already in the library");
             break ReturningBlock;
         }
 
-        member.ReturnItem(item ,dateOfReturning);
+        member.ReturnItem(item,dateOfReturning);
         item.setAvailable();
         System.out.println(item.title + " is returned successfully in "+ dateOfReturning.day + '/' + dateOfReturning.month + '/' + dateOfReturning.year + " by "+ member.name + " !");
-        member.ReturnItem(item,dateOfReturning);
+        /// ///NOT DONE YETTT
+        member.DateOfBorrowing.trimToSize();
+        member.DateOfReturning.trimToSize();
+        if(ReturnedLate(member.DateOfBorrowing.get(member.DateOfBorrowing.size()-1),member.DateOfReturning.get(member.DateOfReturning.size()-1) )){
+            System.out.println(item.title +" MEOOOWWWWWW");
+        }
+
     }
     }
 
     //7 day check and penalise if returned too late
-    boolean ReturnedLate(){
-//     if(Date.TimeElapsedBetweenTwoDates())
-        return false;
+    boolean ReturnedLate(Date DateOfBorrowing , Date DateOfReturning) {
+        if (Date.TimeElapsedBetweenTwoDates(DateOfBorrowing, DateOfReturning) > 7) {
+            return true;
+         }
+        else {
+            return false;
+        }
     }
 
     //3 items borrowed limiter
@@ -136,6 +151,8 @@ public class Library {
         //imo we make the main class describe the search method, and we ask for user input to decide what to do.
     }
 
-
+int justsotheycanletmepush(){
+        return 0;
+    }
 
 }
