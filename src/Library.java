@@ -5,7 +5,8 @@ public class Library {
     ArrayList<Item> listOfItems = new ArrayList<>();
     ArrayList<Member> listOfMembers = new ArrayList<>();
     Scanner in = new Scanner(System.in);
-    Member currantUser;
+    int memberInt;
+
 
     public Library() {
     }
@@ -44,13 +45,9 @@ public class Library {
     void RegisterMember(Member member){
         listOfMembers.add(member);
 }
-    void SignIn(){
+    void SignIn(Member currantUser){
 
-        System.out.println("please enter your name: ");
-        String name = in.next();
-        System.out.println("please enter your fucking registration number: ");
-        int registrationNumber = in.nextInt();
-        Member currantUser = new Member(registrationNumber,name.toLowerCase());
+
 
 
         for(Member member: listOfMembers) {
@@ -58,6 +55,7 @@ public class Library {
                 System.out.println("Hello Mr." + currantUser.name.toUpperCase());
                 member.setSignedIn(true);
                 currantUser.setSignedIn(true);
+                memberInt = listOfMembers.indexOf(member);
             }
         }
         if(!currantUser.isSignedIn()){
@@ -71,7 +69,8 @@ public class Library {
             if(!listOfItems.contains(item) && !listOfMembers.contains(member)){
                 System.out.println("!! Sorry something went wrong " );
             }
-            if (!listOfMembers.contains(member)) {
+         /*************listOfMembers.get(memberInt).isSignedIn()*******************/
+            if (listOfMembers.contains(member)) {
                 System.out.println( "! Mr. " + member.name + " is not registered in our system ");
             }
             if(!listOfItems.contains(item)){
