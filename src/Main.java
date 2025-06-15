@@ -13,11 +13,18 @@ public class Main {
         Library l =new Library();
         l.RegisterItem(book);
 
-        Member m = new Member(99,"Amin");
+        Member m = new Member("amin");
+        Member m1= new Member("Amin");
         l.RegisterMember(m);
+        /*System.out.println(m.registrationNumber);
+        System.out.println(m1.registrationNumber);
+        l.RegisterMember(m1);
+
         l.ItemLend(m,book , date1);
         l.ItemLend(m,book,date2);
-        l.ItemLend(m,book , date2);
+        l.ItemLend(m,book , date2);**/
+        l.SignIn();
+
 //        l.ItemLend(m,book3 , date1);
 //        l.ItemLend(m,book4 , date1);
 

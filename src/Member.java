@@ -1,17 +1,23 @@
 import java.util.ArrayList;
 
 public class Member {
-    int registrationNumber;
+    int registrationNumber = 20250;
     String name;
-
+    static int count = 0;
     ArrayList<Item> BorrowedItems = new ArrayList<>();
     ArrayList<Date> DateOfBorrowing = new ArrayList<>();
     ArrayList<Date> DateOfReturning = new ArrayList<>();
     //for the 3 items limit, because they want the date of borrow/return. It makes so you can see each member's history.
     private int numberOfBorrowedItems = 0;
+    private boolean signedIn = false;
 
 
-    Member(int registrationNumber, String name){
+    Member(String name){
+        registrationNumber = registrationNumber + count;
+        count = count + 1;
+        this.name = name;
+    }
+    Member(int registrationNumber, String name ){
         this.registrationNumber = registrationNumber;
         this.name = name;
     }
@@ -43,6 +49,24 @@ public class Member {
 
     int getNumberOfBorrowedItems(){
         return numberOfBorrowedItems;
+    }
+    void setSignedIn(boolean signedIn){
+        this.signedIn = signedIn;
+    }
+
+    public boolean isSignedIn() {
+        return signedIn;
+    }
+
+    boolean equals(Member tempMember){
+        if(this.registrationNumber == tempMember.registrationNumber && this.name.equals(tempMember.name)){
+            return true;
+        }
+        else{
+            return false;
+        }
+
+
     }
 
 }
