@@ -3,7 +3,6 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
         Date date1 = new Date(25, 8,2015);
         Date date2 = new Date(29, 8,2015);
         Item book = new Book(2,"Choco", 1990 ,"hah","ahmad ",99,"Sa33ed ",true);
@@ -24,12 +23,7 @@ public class Main {
         l.ItemLend(m,book , date1);
         l.ItemLend(m,book,date2);
         l.ItemLend(m,book , date2);**/
-        System.out.println("please enter your name: ");
-        String name = in.next();
-        System.out.println("please enter your registration number: ");
-        int registrationNumber = in.nextInt();
-        Member currantUser = new Member(registrationNumber,name.toLowerCase());
-        l.SignIn(currantUser);
+        l.SignIn();
 
 //        l.ItemLend(m,book3 , date1);
 //        l.ItemLend(m,book4 , date1);

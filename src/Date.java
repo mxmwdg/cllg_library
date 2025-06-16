@@ -29,7 +29,8 @@ public class Date {
 
         return temp;
     }
-    public int TimeElapsedBetweenTwoDates(Date borrowDate, Date returnDate){
-            return returnDate.convertedDate - borrowDate.convertedDate;
+    //Added The abs so we don't care about the order
+    public static int TimeElapsedBetweenTwoDates(Date borrowDate, Date returnDate){
+            return Math.abs(returnDate.convertedDate - borrowDate.convertedDate);
     }
 }

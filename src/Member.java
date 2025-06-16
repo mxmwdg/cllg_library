@@ -59,7 +59,7 @@ public class Member {
     }
 
     boolean equals(Member tempMember){
-        if(this.registrationNumber == tempMember.registrationNumber && this.name.equals(tempMember.name)){
+        if(this.registrationNumber == tempMember.registrationNumber && this.name.toLowerCase().equals(tempMember.name.toLowerCase())){
             return true;
         }
         else{
