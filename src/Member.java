@@ -22,6 +22,13 @@ public class Member {
         this.registrationNumber = registrationNumber;
         this.name = name;
     }
+    Member(){
+        registrationNumber = registrationNumber + count;
+        count = count + 1;
+        this.name = "Samer <3";
+    }
+
+
     void BorrowItem(Item item, Date dateOfBorrowing ){
         BorrowedItems.add(item);
         BorrowedItemsHistory.add(item);
