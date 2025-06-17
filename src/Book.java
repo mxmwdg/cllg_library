@@ -5,7 +5,7 @@ public class Book extends Item {
     int numOfPages;
     String publisher;
 
-<<<<<<< HEAD
+
 
     Book(String title){
         super(title);
@@ -13,15 +13,9 @@ public class Book extends Item {
         count1=count1+1;
     }
 
-
-    Book(int IdOfBook,String title , int YearOfPublishing , String topic , String author, int numOfPages, String publisher, boolean available){
+    Book(int idOfBook , String title , int YearOfPublishing , String topic ,String author, int numOfPages, String publisher, boolean available){
         super(title,YearOfPublishing,topic,available);
         this.IdOfBook=IdOfBook;
-=======
-//If anyone make the id get set by itself , remover all the ID here
-    Book(int id , String title , int YearOfPublishing , String topic ,String author, int numOfPages, String publisher, boolean available){
-        super(id,title,YearOfPublishing,topic,available);
->>>>>>> e9bca23b4a3adc42ce69b7e872a4745fbc496024
         this.author = author;
         this.numOfPages = numOfPages;
         this.publisher = publisher;
@@ -29,55 +23,43 @@ public class Book extends Item {
 
     }
 
-    Book(int id , String title , int YearOfPublishing , String topic , int numOfPages, String publisher, boolean available){
-        super(id,title,YearOfPublishing,topic,available);
+    Book( String title , int YearOfPublishing , String topic , int numOfPages, String publisher, boolean available){
+        super(title,YearOfPublishing,topic,available);
         this.numOfPages = numOfPages;
         this.publisher = publisher;
         this.author = "Anonymous author";
 
     }
 
-    Book(int id , String title , String topic ,String author, int numOfPages, String publisher, boolean available){
-        super(id,title,2025,topic,available);
+    Book( String title , String topic ,String author, int numOfPages, String publisher, boolean available){
+        super(title,2025,topic,available);
         this.author = author;
         this.numOfPages = numOfPages;
         this.publisher = publisher;
 
     }
-    Book(int id , String title , int YearOfPublishing , String topic ,String author, int numOfPages, boolean available){
-        super(id,title,YearOfPublishing,topic,available);
+    Book( String title , int YearOfPublishing , String topic ,String author, int numOfPages, boolean available){
+        super(title,YearOfPublishing,topic,available);
         this.author = author;
         this.numOfPages = numOfPages;
         this.publisher = "Anonymous Publisher";
     }
 
-    Book(int id , String title , int YearOfPublishing , String topic , int numOfPages, boolean available){
-        super(id,title,YearOfPublishing,topic,available);
+    Book( String title , int YearOfPublishing , String topic , int numOfPages, boolean available){
+        super(title,YearOfPublishing,topic,available);
         this.numOfPages = numOfPages;
         this.publisher = "Anonymous Publisher";
         this.author = "Anonymous author";
     }
 
     Book(){
-        super(20,"NO Name ",2025,"no assigned topic",true);
+        super("NO Name ",2025,"no assigned topic",true);
         this.author = "Anonymous author";
         this.numOfPages = 200;
         this.publisher = "Anonymous Publisher";
         this.author = "Anonymous author ";
 
     }
-    Book(String title){
-        super(20,title,2025,"no assigned topic",true);
-        this.author = "Anonymous author";
-        this.numOfPages = 200;
-        this.publisher = "Anonymous Publisher";
-        this.author = "Anonymous author ";
-
-    }
-
-
-
-
 
     @Override
     void Return(){
