@@ -42,6 +42,7 @@ public class Library {
         member.setSignedIn(true);
         }
     }*/
+
     void RegisterMember(Member member) {
         if (listOfMembers.contains(member)) {
             System.out.println("! Mr ." + member.name + " is already registered in our system ");
@@ -147,7 +148,7 @@ public class Library {
                 int year = in.nextInt();
                 for (Project project : listOfProjects) {
                     if (project.projectYear == year) {
-                        project.info();
+                        project.getInfo();
                     }
                 }
             }
@@ -164,7 +165,7 @@ public class Library {
             //every member and their borrowed items.
             case 2: {
                 for (Member member : listOfMembers) {
-                    System.out.println("member: " + member.name + " has borrowed the following titles:");
+                    System.out.println("Member: " + member.name + " has borrowed the following titles: ");
                     for (Item borrowedItem : member.BorrowedItems) {
                         System.out.println(borrowedItem.title);
                     }

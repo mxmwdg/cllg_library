@@ -34,4 +34,19 @@ public abstract class Item {
     public void setAvailable(){
         this.available = true;
     }
+
+    abstract String getInfo();
+
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", yearOfPublishing=" + yearOfPublishing +
+                ", topic='" + topic + '\'' +
+                ", available=" + available +
+                '}';
+    }
 }
+
