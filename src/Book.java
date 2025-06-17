@@ -1,11 +1,22 @@
 public class Book extends Item {
+    int IdOfBook=1000;
+    int count1=0;
     String author;
     int numOfPages;
     String publisher;
     boolean available;
 
-    Book(int id , String title , int YearOfPublishing , String topic ,String author, int numOfPages, String publisher, boolean available){
-        super(id,title,YearOfPublishing,topic,available);
+
+    Book(String title){
+        super(title);
+        IdOfBook=IdOfBook+count1;
+        count1=count1+1;
+    }
+
+
+    Book(int IdOfBook,String title , int YearOfPublishing , String topic , String author, int numOfPages, String publisher, boolean available){
+        super(title,YearOfPublishing,topic,available);
+        this.IdOfBook=IdOfBook;
         this.author = author;
         this.numOfPages = numOfPages;
         this.publisher = publisher;

@@ -1,19 +1,24 @@
 public abstract class Item {
-    public int id;
     public String title;
     public int yearOfPublishing;
     public String topic;
     private boolean available;
 
 
-    public Item(int id,String title,int yearOfPublishing,String topic,boolean available) {
-        this.id = id;
+    public Item(String title,int yearOfPublishing,String topic,boolean available) {
         this.title = title;
         this.yearOfPublishing = yearOfPublishing;
         this.topic = topic;
         this.available = available;
 
     }
+
+    public Item(String title) {
+        this.title=title;
+    }
+
+
+
     abstract void Return();
     abstract void borrow();
 
