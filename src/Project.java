@@ -20,4 +20,6 @@ available=true;
     void borrow() {
 available=false;
     }
+
+    void info(){}
 }

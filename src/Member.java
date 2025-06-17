@@ -5,6 +5,7 @@ public class Member {
     String name;
     static int count = 0;
     ArrayList<Item> BorrowedItems = new ArrayList<>();
+    ArrayList<Item> BorrowedItemsHistory = new ArrayList<>();
     ArrayList<Date> DateOfBorrowing = new ArrayList<>();
     ArrayList<Date> DateOfReturning = new ArrayList<>();
     //for the 3 items limit, because they want the date of borrow/return. It makes so you can see each member's history.
@@ -22,19 +23,8 @@ public class Member {
         this.name = name;
     }
     void BorrowItem(Item item, Date dateOfBorrowing ){
-       /*the following comment can be used in the library class*********/
-        /*, int day, int month,int year
-       if(BorrowedItems.size()<=3){
-            BorrowedItems.add(item);
-            Date date = new Date(day,month,year);
-            System.out.println("here you go!");
-        }
-        else
-            System.out.println("you can't borrow more than three items." + "/n" +
-                                "you have to return an item first.");
-                                Tm BY hamza */
-
         BorrowedItems.add(item);
+        BorrowedItemsHistory.add(item);
         DateOfBorrowing.add(dateOfBorrowing);
         numberOfBorrowedItems = numberOfBorrowedItems + 1;
 

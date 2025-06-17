@@ -1,29 +1,32 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.LocalDate;
 
 public class Library {
     ArrayList<Item> listOfItems = new ArrayList<>();
+    ArrayList<Project> listOfProjects = new ArrayList<>();
+    ArrayList<Book> listOfBooks = new ArrayList<>();
     ArrayList<Member> listOfMembers = new ArrayList<>();
     Scanner in = new Scanner(System.in);
+
     public Library() {
     }
 
-    public Library(ArrayList<Item> listOfItems , ArrayList<Member> list0fMembers ){
+    public Library(ArrayList<Item> listOfItems, ArrayList<Member> list0fMembers) {
         this.listOfItems = listOfItems;
-        this.listOfMembers=list0fMembers;
+        this.listOfMembers = list0fMembers;
     }
 
-    void RegisterItem(Item item ) {
-        if (listOfItems.contains(item)){
+    void RegisterItem(Item item) {
+        if (listOfItems.contains(item)) {
             System.out.println("! We already have the " + item.title + " in our library ");
-        }
-        else {
+        } else {
             listOfItems.add(item);
             System.out.println(item.title + " is registered successfully !");
         }
     }
 
-    void RegisterMember(){
+    /*void RegisterMember(){
         System.out.println("please enter your name: ");
         String name = in.next();
 
@@ -38,50 +41,46 @@ public class Library {
         System.out.println("Your registration number is: " + member.registrationNumber);
         member.setSignedIn(true);
         }
+    }*/
+    void RegisterMember(Member member) {
+        if (listOfMembers.contains(member)) {
+            System.out.println("! Mr ." + member.name + " is already registered in our system ");
+        } else {
+            listOfMembers.add(member);
+            System.out.println(member.name + " is registered successfully !");
+            System.out.println("Your registration number is: " + member.registrationNumber);
+            member.setSignedIn(true);
+        }
     }
-    void RegisterMember(Member member){
-    if (listOfMembers.contains(member)){
-        System.out.println("! Mr ." + member.name + " is already registered in our system ");
-    }
-        else{
-        listOfMembers.add(member);
-        System.out.println(member.name + " is registered successfully !");
-        System.out.println("Your registration number is: " + member.registrationNumber);
-        member.setSignedIn(true);
-    }
-}
-    void SignIn(){
 
-        System.out.println("please enter your name: ");
-        String name = in.next();
-        System.out.println("please enter your fucking registration number: ");
-        int registrationNumber = in.nextInt();
-        Member tempMember = new Member(registrationNumber,name.toLowerCase());
-        for(Member member: listOfMembers) {
-            if (member.equals(tempMember)) {
-                System.out.println("Hello Mr." + tempMember.name.toUpperCase());
+    void SignIn(Member currantUser) {
+        for (Member member : listOfMembers) {
+            if (member.equals(currantUser)) {
+                System.out.println("Hello Mr." + currantUser.name.toUpperCase());
                 member.setSignedIn(true);
-                tempMember.setSignedIn(true);
+                currantUser.setSignedIn(true);
             }
         }
-        if(!tempMember.isSignedIn()){
+        if (!currantUser.isSignedIn()) {
             System.out.println("wrong sign in information, please register if you aren't a member <3 ");
         }
     }
 
 
-    void ItemLend(Member member,Item item , Date dateOfBorrowing) {
-        BorrowingBlock:{
-            if(!listOfItems.contains(item) && !listOfMembers.contains(member)){
-                System.out.println("!! Sorry something went wrong " );
+    void ItemLend(Member member, Item item, Date dateOfBorrowing) {
+        BorrowingBlock:
+        {
+            if (!listOfItems.contains(item) && !listOfMembers.contains(member)) {
+                System.out.println("!! Sorry something went wrong ");
             }
+            /* ************listOfMembers.get(memberInt).isSignedIn()****************** */
             if (!listOfMembers.contains(member)) {
-                System.out.println( "! Mr. " + member.name + " is not registered in our system ");
+                System.out.println("! Mr. " + member.name + " is not registered in our system ");
             }
-            if(!listOfItems.contains(item)){
-                System.out.println( "! The " + item.title + " is not registered in our system ");
+            if (!listOfItems.contains(item)) {
+                System.out.println("! The " + item.title + " is not registered in our system ");
             }
-            if(!listOfItems.contains(item) || !listOfMembers.contains(member)){
+            if (!listOfItems.contains(item) || !listOfMembers.contains(member)) {
                 break BorrowingBlock;
             }
 
@@ -92,11 +91,10 @@ public class Library {
                     System.out.println("!! Sorry This Book Is Unavailable" + "\n" + " Please Choose Another Book");
                     break MainIf;
                 } else {
-                    item.Return();
-                    System.out.println(item.title + " " + "is Borrowed in " + dateOfBorrowing.day + '/' + dateOfBorrowing.month + '/' + dateOfBorrowing.year + " by " + member.name  + " !");
+                    item.borrow();
+                    System.out.println(item.title + " " + "is Borrowed in " + dateOfBorrowing.day + '/' + dateOfBorrowing.month + '/' + dateOfBorrowing.year + " by " + member.name + " !");
+                    member.BorrowItem(item, dateOfBorrowing);
                 }
-                member.BorrowItem(item, dateOfBorrowing);
-                //member.BorrowedItems.add(item);
                 //Date date = new Date(day,month,year);
             } else
                 System.out.println("!! Sorry , You can't borrow more than three items." + "\n" +
@@ -105,37 +103,76 @@ public class Library {
 
         }
     }
-    //check if the member has the book in the first place, or he could return a book he doesn't have.
-    void ItemReturned(Member member ,Item item , Date dateOfReturning ){
-        ReturningBlock:{  if(item.IsAvailable()){
-            System.out.println("! The "+ item.title + " is already in the library");
-            break ReturningBlock;
-        }
 
-        member.ReturnItem(item ,dateOfReturning);
-        item.setAvailable();
-        System.out.println(item.title + " is returned successfully in "+ dateOfReturning.day + '/' + dateOfReturning.month + '/' + dateOfReturning.year + " by "+ member.name + " !");
-        member.ReturnItem(item,dateOfReturning);
-    }
+    //check if the member has the book in the first place, or he could return a book he doesn't have.
+    void ItemReturned(Member member, Item item, Date dateOfReturning) {
+        ReturningBlock:
+        {
+            if (item.IsAvailable()) {
+                System.out.println("! The " + item.title + " is already in the library");
+                break ReturningBlock;
+            }
+
+            member.ReturnItem(item, dateOfReturning);
+            item.setAvailable();
+            System.out.println(item.title + " is returned successfully in " + dateOfReturning.day + '/' + dateOfReturning.month + '/' + dateOfReturning.year + " by " + member.name + " !");
+            member.ReturnItem(item, dateOfReturning);
+        }
     }
 
     //7 day check and penalise if returned too late
-    boolean ReturnedLate(){
-//     if(Date.TimeElapsedBetweenTwoDates())
+    boolean ReturnedLate() {
+        LocalDate currantDate = LocalDate.now();
+        //if(Date.TimeElapsedBetweenTwoDates() > 7)
         return false;
     }
 
     //3 items borrowed limiter
-    boolean MemberIsAbleToBorrow(Member member){
+    boolean MemberIsAbleToBorrow(Member member) {
         return member.getNumberOfBorrowedItems() < 3;
     }
 
-    void SearchForAnItem(int optionNumber){}
+    void SearchForAnItem(int optionNumber) {
+        switch (optionNumber) {
+            //every book
+            case 1: {
+                for (Book book : listOfBooks) {
+                    book.info();
+                }
+            }
 
-    void SearchForCertainMembers(int optionNumber){
-        //imo we make the main class describe the search method, and we ask for user input to decide what to do.
+            //every project selected by year
+            case 3: {
+                System.out.println("select the year of the projects you want to view: ");
+                int year = in.nextInt();
+                for (Project project : listOfProjects) {
+                    if (project.projectYear == year) {
+                        project.info();
+                    }
+                }
+            }
+            case 4: {
+
+            }
+        }
     }
 
+    void SearchForCertainMembers(int optionNumber) {
+        //imo we make the main class describe the search method, and we ask for user input to decide what to do.
 
+        switch (optionNumber) {
+            //every member and their borrowed items.
+            case 2: {
+                for (Member member : listOfMembers) {
+                    System.out.println("member: " + member.name + " has borrowed the following titles:");
+                    for (Item borrowedItem : member.BorrowedItems) {
+                        System.out.println(borrowedItem.title);
+                    }
+                }
+            }
 
+        }
+    }
 }
+
+
