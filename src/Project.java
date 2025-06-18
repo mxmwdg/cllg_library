@@ -33,6 +33,8 @@ public class Project extends Item {
             this.projectYear = 3;
             for (String s : this.team)
                 s = "null";
+        this.IdOfProject = IdOfProject + 900 + count2;
+
         }
 
     public int getIdOfProject() {
@@ -43,7 +45,16 @@ public class Project extends Item {
             super( title, 2025, topic);
             this.projectYear = projectYear;
             this.team = team;
-
+        if(topic.equalsIgnoreCase("basic science") || topic.equalsIgnoreCase("science"))
+            this.IdOfProject = IdOfProject + 100 + count2;
+        else if(topic.equalsIgnoreCase("ai")|| topic.equalsIgnoreCase("artificial intelligence"))
+            this.IdOfProject = IdOfProject + 300 + count2;
+        else if(topic.equalsIgnoreCase("software development")|| topic.equalsIgnoreCase("software"))
+            this.IdOfProject = IdOfProject + 500 + count2;
+        else if (topic.equalsIgnoreCase("networks"))
+            this.IdOfProject = IdOfProject + 700 + count2;
+        else
+            this.IdOfProject = IdOfProject + 900 + count2;
         }
 
     public Project(  String title,int yearOfPublishing, String topic, int projectYear){
@@ -52,13 +63,23 @@ public class Project extends Item {
 
             for (String s : this.team)
                 s = "null";
+        if(topic.equalsIgnoreCase("basic science") || topic.equalsIgnoreCase("science"))
+            this.IdOfProject = IdOfProject + 100 + count2;
+        else if(topic.equalsIgnoreCase("ai")|| topic.equalsIgnoreCase("artificial intelligence"))
+            this.IdOfProject = IdOfProject + 300 + count2;
+        else if(topic.equalsIgnoreCase("software development")|| topic.equalsIgnoreCase("software"))
+            this.IdOfProject = IdOfProject + 500 + count2;
+        else if (topic.equalsIgnoreCase("networks"))
+            this.IdOfProject = IdOfProject + 700 + count2;
+        else
+            this.IdOfProject = IdOfProject + 900 + count2;
         }
 
     public Project(  String title,int yearOfPublishing, int projectYear, String[] team){
-            super( title, yearOfPublishing, "No topic assigned");
-            this.projectYear = projectYear;
-            this.team = team;
-
+        super( title, yearOfPublishing, "No topic assigned");
+        this.projectYear = projectYear;
+        this.team = team;
+        this.IdOfProject = IdOfProject + 900 + count2;
         }
 
 

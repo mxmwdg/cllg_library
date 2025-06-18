@@ -6,12 +6,13 @@ public class Main {
         Scanner in = new Scanner(System.in);
         Date date1 = new Date(25, 8,2015);
         Date date2 = new Date(29, 8,2015);
-        Item book = new Book("Choco", 1990 ,"hah","ahmad ",99,"Sa33ed ");
+        Item book = new Book("Choco", 1990 ,"basic science","ahmad ",99,"Sa33ed ");
         Item book2 = new Book("coco", 1990 ,"hah","ahmad ",99,"Sa33ed ");
 
         Book book3 = new Book("boo", 1990 ,"hah","ahmad ",99,"Sa33ed ");
         Item book4 = new Book("joo", 1990 ,"hah","ahmad ",99,"Sa33ed ");
         Library l =new Library();
+
         String []a ;
 //        Item proj = new Project("haz ", 3 ,true , 2020 ,  );
 
@@ -21,9 +22,8 @@ public class Main {
         Member m1= new Member("Bilal");
         l.RegisterMember(m);
         l.RegisterMember(m1);
-        m.BorrowItem(book,date1);
-        l.ItemLend(m1,book2,date2);
 
+        l.ItemLend(m1,book,date2);
 
         /*l.RegisterMember(m);
         System.out.println("please enter your name: ");

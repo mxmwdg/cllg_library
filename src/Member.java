@@ -10,6 +10,7 @@ public class Member {
     ArrayList<Date> DateOfReturning = new ArrayList<>();
     //for the 3 items limit, because they want the date of borrow/return. It makes so you can see each member's history.
     private boolean signedIn = false;
+    private boolean isLate;
 
 
     Member(String name){
@@ -52,12 +53,7 @@ public class Member {
     }
 
     boolean equals(Member tempMember){
-        if(this.registrationNumber == tempMember.registrationNumber && this.name.toLowerCase().equals(tempMember.name.toLowerCase())){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return this.registrationNumber == tempMember.registrationNumber && this.name.toLowerCase().equals(tempMember.name.toLowerCase());
 
 
     }

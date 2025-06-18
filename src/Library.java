@@ -10,7 +10,6 @@ public class Library {
     ArrayList<Book> listOfBooks = new ArrayList<>();
     ArrayList<Member> listOfMembers = new ArrayList<>();
     Scanner in = new Scanner(System.in);
-
     public Library() {
     }
 
@@ -181,9 +180,8 @@ public class Library {
                     book.getInfo();
                 }
             }
-
             //every project selected by year
-            case 3: {
+            case 2: {
                 System.out.println("Select the year of the projects you want to view: ");
                 int year = in.nextInt();
                 for (Project project : listOfProjects) {
@@ -193,20 +191,112 @@ public class Library {
                 }
             }
             //every item selected by topics
-            case 4: {
+            case 3: {
                 System.out.println("Select the the topic of the items you want to view : ");
                 System.out.println("1.basic science  2.AI  3.software development  4.networks");
                 int c = in.nextInt();
-                switch(c){
-                    case 1 :
+                switch (c) {
+                    case 1: {
+                        for (Book book : listOfBooks) {
+                            if (book.IdOfBook >= 1100 && book.IdOfBook < 1300) {
+                                book.getInfo();
+                            }
+                        }
+                        for (Project project : listOfProjects) {
+                            if (project.IdOfProject >= 2100 && project.IdOfProject < 2300) {
+                                project.getInfo();
+                            }
+                        }
+                    }
+                    case 2: {
+                        for (Book book : listOfBooks) {
+                            if (book.IdOfBook >= 1300 && book.IdOfBook < 1500) {
+                                book.getInfo();
+                            }
+                        }
+                        for (Project project : listOfProjects) {
+                            if (project.IdOfProject >= 2300 && project.IdOfProject < 2500) {
+                                project.getInfo();
+                            }
+                        }
+                    }
+                    case 3: {
+                        for (Book book : listOfBooks) {
+                            if (book.IdOfBook >= 1500 && book.IdOfBook < 1700) {
+                                book.getInfo();
+                            }
+                        }
+                        for (Project project : listOfProjects) {
+                            if (project.IdOfProject >= 2500 && project.IdOfProject < 2700) {
+                                project.getInfo();
+                            }
+                        }
+                    }
+                    case 4: {
+                        for (Book book : listOfBooks) {
+                            if (book.IdOfBook >= 1900 && book.IdOfBook < 2000) {
+                                book.getInfo();
+                            }
+                        }
+                        for (Project project : listOfProjects) {
+                            if (project.IdOfProject >= 2900) {
+                                project.getInfo();
+                            }
+                        }
+                    }
                 }
             }
+            //every available project by topic
+            case 4: {
+                System.out.println("Select the the topic of the available projects you want to view : ");
+                System.out.println("1.basic science  2.AI  3.software development  4.networks");
+                int c = in.nextInt();
+                switch (c) {
+                    case 1: {
+                        for (Project project : listOfProjects) {
+                            if (project.IdOfProject >= 2100 && project.IdOfProject < 2300 && project.IsAvailable()) {
+                                project.getInfo();
+                            }
+                        }
+                    }
+                    case 2: {
+                        for (Project project : listOfProjects) {
+                            if (project.IdOfProject >= 2300 && project.IdOfProject < 2500 && project.IsAvailable()) {
+                                project.getInfo();
+                            }
+                        }
+                    }
+                    case 3: {
+                        for (Project project : listOfProjects) {
+                            if (project.IdOfProject >= 2500 && project.IdOfProject < 2700 && project.IsAvailable()) {
+                                project.getInfo();
+                            }
+                        }
+                    }
+                    case 4: {
+                        for (Project project : listOfProjects) {
+                            if (project.IdOfProject >= 2900 && project.IsAvailable()) {
+                                project.getInfo();
+                            }
+                        }
+                    }
+                }
+
+            }
+            //every unavailable book
+            case 5:{
+                for(Book book :listOfBooks){
+                    if(!book.IsAvailable()){
+                        book.getInfo();
+                    }
+                }
+            }
+            //search for a certain book or project by id or title or topic
+
         }
     }
 
     void SearchForCertainMembers(int optionNumber) {
-        //imo we make the main class describe the search method, and we ask for user input to decide what to do.
-
         switch (optionNumber) {
             //every member and their borrowed items.
             case 2: {

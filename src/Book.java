@@ -107,6 +107,7 @@ public class Book extends Item {
         this.numOfPages = 200;
         this.publisher = "Anonymous Publisher";
         this.author = "Anonymous author ";
+        this.IdOfBook = IdOfBook + 900 + count1;
 
     }
 
