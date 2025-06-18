@@ -5,12 +5,11 @@ public abstract class Item {
     private boolean available;
 
 
-    public Item(String title,int yearOfPublishing,String topic,boolean available) {
+    public Item(String title,int yearOfPublishing,String topic) {
         this.title = title;
         this.yearOfPublishing = yearOfPublishing;
         this.topic = topic;
-        this.available = available;
-
+        this.available = true;
     }
 
     public Item(String title) {
@@ -23,10 +22,7 @@ public abstract class Item {
     abstract void borrow();
 
     public boolean IsAvailable() {
-        if (this.available)
-            return true;
-        else
-           return false;
+        return this.available;
     }
     public void setAvailable(boolean t){
         this.available = t;
@@ -44,6 +40,7 @@ public abstract class Item {
                 ", title='" + title + '\'' +
                 ", yearOfPublishing=" + yearOfPublishing +
                 ", topic='" + topic + '\'' +
+
                 ", available=" + available +
                 '}';
     }

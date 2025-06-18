@@ -1,6 +1,8 @@
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.time.LocalDate;
+import java.util.function.Consumer;
 
 public class Library {
     ArrayList<Item> listOfItems = new ArrayList<>();
@@ -17,14 +19,33 @@ public class Library {
         this.listOfMembers = list0fMembers;
     }
 
-    void RegisterItem(Item item) {
-        if (listOfItems.contains(item)) {
-            System.out.println("! We already have the " + item.title + " in our library ");
-        } else {
-            listOfItems.add(item);
-            System.out.println(item.title + " is registered successfully !");
+    void RegisterItem() {
+        System.out.println("What type of item do you want to register ? \n 1.for Book \n 2.for Project");
+        int n =in.nextInt();
+        if(n==1) {
+
+            Book book = new Book();
+            if (listOfBooks.contains(book)) {
+                System.out.println("! We already have the " + book.title + " in our library ");
+            } else {
+                listOfBooks.add(book);
+                System.out.println(book.title + " is registered successfully !");
+            }
         }
-    }
+        else if(n==2){
+
+            Project project = new Project();
+            if (listOfProjects.contains(project)) {
+                System.out.println("! We already have the " + project.title + " in our library ");
+            } else {
+                listOfProjects.add(project);
+                System.out.println(project.title + " is registered successfully !");
+            }
+
+            }
+        else
+            System.out.println("Wrong Number ");
+        }
 
     /*void RegisterMember(){
         System.out.println("please enter your name: ");
@@ -94,6 +115,7 @@ public class Library {
                 } else {
                     item.borrow();
                     System.out.println(item.title + " " + "is Borrowed in " + dateOfBorrowing.day + '/' + dateOfBorrowing.month + '/' + dateOfBorrowing.year + " by " + member.name + " !");
+                    System.out.println("!Note : The borrowing time allowed is only 7 days ");
                     member.BorrowItem(item, dateOfBorrowing);
                 }
                 //Date date = new Date(day,month,year);
@@ -128,6 +150,24 @@ public class Library {
         return false;
     }
 
+    /*void showAllBooks(){
+        System.out.println("Here is all the Books we have in the library :");
+        listOfItems.forEach((book) -> { System.out.printf(book.title +" ");});
+        System.out.println("\n");
+    }
+
+    void showAllMembersWithTheirBorrowedItems(){
+        listOfMembers.forEach(m -> {
+            System.out.println("Member: " +m.name +"\n"+"Borrowed Items :");
+            m.BorrowedItems.forEach(item -> {
+                System.out.printf("\t"+item.title + " ");
+            });
+            System.out.println("\n");
+        });
+
+    }*/
+
+
     //3 items borrowed limiter
     boolean MemberIsAbleToBorrow(Member member) {
         return member.getNumberOfBorrowedItems() < 3;
@@ -138,13 +178,13 @@ public class Library {
             //every book
             case 1: {
                 for (Book book : listOfBooks) {
-                    book.info();
+                    book.getInfo();
                 }
             }
 
             //every project selected by year
             case 3: {
-                System.out.println("select the year of the projects you want to view: ");
+                System.out.println("Select the year of the projects you want to view: ");
                 int year = in.nextInt();
                 for (Project project : listOfProjects) {
                     if (project.projectYear == year) {
@@ -152,8 +192,14 @@ public class Library {
                     }
                 }
             }
+            //every item selected by topics
             case 4: {
-
+                System.out.println("Select the the topic of the items you want to view : ");
+                System.out.println("1.basic science  2.AI  3.software development  4.networks");
+                int c = in.nextInt();
+                switch(c){
+                    case 1 :
+                }
             }
         }
     }
@@ -168,8 +214,13 @@ public class Library {
                     System.out.println("Member: " + member.name + " has borrowed the following titles: ");
                     for (Item borrowedItem : member.BorrowedItems) {
                         System.out.println(borrowedItem.title);
+                        break;
                     }
                 }
+            }
+            case 3: {
+
+
             }
 
         }
