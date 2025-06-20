@@ -214,93 +214,14 @@ public class Library {
                 System.out.println("Select the the topic of the items you want to view : ");
                 System.out.println("1.basic science  2.AI  3.software development  4.networks");
                 int c = in.nextInt();
-                switch (c) {
-                    case 1: {
-                        for (Book book : listOfBooks) {
-                            if (book.IdOfBook >= 1100 && book.IdOfBook < 1300) {
-                                book.getInfo();
-                            }
-                        }
-                        for (Project project : listOfProjects) {
-                            if (project.IdOfProject >= 2100 && project.IdOfProject < 2300) {
-                                project.getInfo();
-                            }
-                        }
-                    }
-                    case 2: {
-                        for (Book book : listOfBooks) {
-                            if (book.IdOfBook >= 1300 && book.IdOfBook < 1500) {
-                                book.getInfo();
-                            }
-                        }
-                        for (Project project : listOfProjects) {
-                            if (project.IdOfProject >= 2300 && project.IdOfProject < 2500) {
-                                project.getInfo();
-                            }
-                        }
-                    }
-                    case 3: {
-                        for (Book book : listOfBooks) {
-                            if (book.IdOfBook >= 1500 && book.IdOfBook < 1700) {
-                                book.getInfo();
-                            }
-                        }
-                        for (Project project : listOfProjects) {
-                            if (project.IdOfProject >= 2500 && project.IdOfProject < 2700) {
-                                project.getInfo();
-                            }
-                        }
-                    }
-                    case 4: {
-                        for (Book book : listOfBooks) {
-                            if (book.IdOfBook >= 1900 && book.IdOfBook < 2000) {
-                                book.getInfo();
-                            }
-                        }
-                        for (Project project : listOfProjects) {
-                            if (project.IdOfProject >= 2900) {
-                                project.getInfo();
-                            }
-                        }
-                    }
-                }
+                SearchForItemsByTopics(c);
             }
             //every available project by topic
             case 4: {
                 System.out.println("Select the the topic of the available projects you want to view : ");
                 System.out.println("1.basic science  2.AI  3.software development  4.networks");
                 int c = in.nextInt();
-                switch (c) {
-                    case 1: {
-                        for (Project project : listOfProjects) {
-                            if (project.IdOfProject >= 2100 && project.IdOfProject < 2300 && project.IsAvailable()) {
-                                project.getInfo();
-                            }
-                        }
-                    }
-                    case 2: {
-                        for (Project project : listOfProjects) {
-                            if (project.IdOfProject >= 2300 && project.IdOfProject < 2500 && project.IsAvailable()) {
-                                project.getInfo();
-                            }
-                        }
-                    }
-                    case 3: {
-                        for (Project project : listOfProjects) {
-                            if (project.IdOfProject >= 2500 && project.IdOfProject < 2700 && project.IsAvailable()) {
-                                project.getInfo();
-                            }
-                        }
-                    }
-                    case 4: {
-                        for (Project project : listOfProjects) {
-                            if (project.IdOfProject >= 2900 && project.IsAvailable()) {
-                                project.getInfo();
-                            }
-                        }
-                    }
-                }
-
+                SearchForProjectsByTopic(c);
             }
             //every unavailable book
             case 5:{
@@ -311,7 +232,29 @@ public class Library {
                 }
             }
             //search for a certain book or project by id or title or topic
+            case 6:{
+                System.out.println("select preferred method of search:");
+                System.out.println("1.id  2.title 3.topic");
+                int c = in.nextInt();
+                switch (c){
+                    case 1: {
+                        System.out.println("enter the id:");
+                        int n = in.nextInt();
+                        listOfProjects.forEach(m -> {
+                            if(m.IdOfProject == n )
+                                m.getInfo();
+                        });
+                        listOfBooks.forEach(b -> {
+                            if(b.IdOfBook == n )
+                                b.getInfo();
+                        });
+                    }
+                    case 2: {
 
+                    }
+                }
+
+            }
         }
     }
 
@@ -334,6 +277,95 @@ public class Library {
 
         }
     }
+    void SearchForProjectsByTopic(int c){
+        {
+            switch (c) {
+                case 1: {
+                    for (Project project : listOfProjects) {
+                        if (project.IdOfProject >= 2100 && project.IdOfProject < 2300 && project.IsAvailable()) {
+                            project.getInfo();
+                        }
+                    }
+                }
+                case 2: {
+                    for (Project project : listOfProjects) {
+                        if (project.IdOfProject >= 2300 && project.IdOfProject < 2500 && project.IsAvailable()) {
+                            project.getInfo();
+                        }
+                    }
+                }
+                case 3: {
+                    for (Project project : listOfProjects) {
+                        if (project.IdOfProject >= 2500 && project.IdOfProject < 2700 && project.IsAvailable()) {
+                            project.getInfo();
+                        }
+                    }
+                }
+                case 4: {
+                    for (Project project : listOfProjects) {
+                        if (project.IdOfProject >= 2900 && project.IsAvailable()) {
+                            project.getInfo();
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+    void SearchForItemsByTopics(int c){
+        {switch (c) {
+                case 1: {
+                    for (Book book : listOfBooks) {
+                        if (book.IdOfBook >= 1100 && book.IdOfBook < 1300) {
+                            book.getInfo();
+                        }
+                    }
+                    for (Project project : listOfProjects) {
+                        if (project.IdOfProject >= 2100 && project.IdOfProject < 2300) {
+                            project.getInfo();
+                        }
+                    }
+                }
+                case 2: {
+                    for (Book book : listOfBooks) {
+                        if (book.IdOfBook >= 1300 && book.IdOfBook < 1500) {
+                            book.getInfo();
+                        }
+                    }
+                    for (Project project : listOfProjects) {
+                        if (project.IdOfProject >= 2300 && project.IdOfProject < 2500) {
+                            project.getInfo();
+                        }
+                    }
+                }
+                case 3: {
+                    for (Book book : listOfBooks) {
+                        if (book.IdOfBook >= 1500 && book.IdOfBook < 1700) {
+                            book.getInfo();
+                        }
+                    }
+                    for (Project project : listOfProjects) {
+                        if (project.IdOfProject >= 2500 && project.IdOfProject < 2700) {
+                            project.getInfo();
+                        }
+                    }
+                }
+                case 4: {
+                    for (Book book : listOfBooks) {
+                        if (book.IdOfBook >= 1900 && book.IdOfBook < 2000) {
+                            book.getInfo();
+                        }
+                    }
+                    for (Project project : listOfProjects) {
+                        if (project.IdOfProject >= 2900) {
+                            project.getInfo();
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 }
 
 
