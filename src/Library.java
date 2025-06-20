@@ -115,12 +115,9 @@ public class Library {
             if (!listOfBooks.contains(item) || !listOfProjects.contains(item) && member.isSignedIn()) {
                 System.out.println("!! Sorry something went wrong ");
             }
-            /* ************listOfMembers.get(memberInt).isSignedIn()****************** */
-
             if (!member.isSignedIn()) {
                 System.out.println("! Mr. " + member.name + " is not registered in our system ");
             }
-
             if (!listOfBooks.contains(item) && !listOfProjects.contains(item)) {
                 System.out.println("! The " + item.title + " is not registered in our system ");
             }
@@ -175,25 +172,6 @@ public class Library {
         //if(Date.TimeElapsedBetweenTwoDates() > 7)
         return false;
     }
-
-    /*void showAllBooks(){
-        System.out.println("Here is all the Books we have in the library :");
-        listOfItems.forEach((book) -> { System.out.printf(book.title +" ");});
-        System.out.println("\n");
-    }
-
-    void showAllMembersWithTheirBorrowedItems(){
-        listOfMembers.forEach(m -> {
-            System.out.println("Member: " +m.name +"\n"+"Borrowed Items :");
-            m.BorrowedItems.forEach(item -> {
-                System.out.printf("\t"+item.title + " ");
-            });
-            System.out.println("\n");
-        });
-
-    }*/
-
-
     //3 items borrowed limiter
     boolean MemberIsAbleToBorrow(Member member) {
         return member.getNumberOfBorrowedItems() < 3;
@@ -251,7 +229,7 @@ public class Library {
                 int c = in.nextInt();
                 SearchForProjectsByTopic(c);
             }
-            //every unavailable book
+            //every unavailable book / every lent book
             case 5:{
                 for(Book book :listOfBooks){
                     if(!book.IsAvailable()){
@@ -268,14 +246,11 @@ public class Library {
                     case 1: {
                         System.out.println("enter the id:");
                         int n = in.nextInt();
-                        listOfProjects.forEach(m -> {
-                            if(m.IdOfProject == n )
+                        listOfItems.forEach(m -> {
+                            if(m.id == n )
                                 m.getInfo();
                         });
-                        listOfBooks.forEach(b -> {
-                            if(b.IdOfBook == n )
-                                b.getInfo();
-                        });
+
                     }
                     case 2: {
                         System.out.println("enter the title:");
@@ -335,50 +310,30 @@ public class Library {
     void SearchForItemsByTopics(int c){
         {switch (c) {
                 case 1: {
-                    for (Book book : listOfBooks) {
-                        if (book.IdOfBook >= 1100 && book.IdOfBook < 1300) {
-                            book.getInfo();
-                        }
-                    }
-                    for (Project project : listOfProjects) {
-                        if (project.IdOfProject >= 2100 && project.IdOfProject < 2300) {
-                            project.getInfo();
+                    for (Item item : listOfItems) {
+                        if (item.id >= 1100 && item.id < 1300 || item.id >= 2100 && item.id < 2300 )  {
+                            item.getInfo();
                         }
                     }
                 }
                 case 2: {
-                    for (Book book : listOfBooks) {
-                        if (book.IdOfBook >= 1300 && book.IdOfBook < 1500) {
-                            book.getInfo();
-                        }
-                    }
-                    for (Project project : listOfProjects) {
-                        if (project.IdOfProject >= 2300 && project.IdOfProject < 2500) {
-                            project.getInfo();
+                    for (Item item : listOfItems) {
+                        if (item.id >= 1300 && item.id < 1500 || item.id >= 2300 && item.id < 2500 )  {
+                            item.getInfo();
                         }
                     }
                 }
                 case 3: {
-                    for (Book book : listOfBooks) {
-                        if (book.IdOfBook >= 1500 && book.IdOfBook < 1700) {
-                            book.getInfo();
-                        }
-                    }
-                    for (Project project : listOfProjects) {
-                        if (project.IdOfProject >= 2500 && project.IdOfProject < 2700) {
-                            project.getInfo();
+                    for (Item item : listOfItems) {
+                        if (item.id >= 1500 && item.id < 1700 || item.id >= 2500 && item.id < 2700 )  {
+                            item.getInfo();
                         }
                     }
                 }
                 case 4: {
-                    for (Book book : listOfBooks) {
-                        if (book.IdOfBook >= 1900 && book.IdOfBook < 2000) {
-                            book.getInfo();
-                        }
-                    }
-                    for (Project project : listOfProjects) {
-                        if (project.IdOfProject >= 2900) {
-                            project.getInfo();
+                    for (Item item : listOfItems) {
+                        if (item.id >= 1900 && item.id < 2000 || item.id >= 2900)  {
+                            item.getInfo();
                         }
                     }
                 }

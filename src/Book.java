@@ -1,49 +1,24 @@
 public class Book extends Item {
-    int IdOfBook=1000;
-    private static int count1=0;
     String author;
     int numOfPages;
     String publisher;
+    int typeNum = 1000;
 
 
 
     Book(String title){
         super(title);
-        IdOfBook=IdOfBook+count1;
-        count1=count1+1;
     }
 
     Book( String title , int YearOfPublishing , String topic ,String author, int numOfPages, String publisher){
-        super(title,YearOfPublishing,topic);
-        if(topic.equalsIgnoreCase("basic science") || topic.equalsIgnoreCase("science"))
-            this.IdOfBook = IdOfBook + 100 + count1;
-        else if(topic.equalsIgnoreCase("ai")|| topic.equalsIgnoreCase("artificial intelligence"))
-            this.IdOfBook = IdOfBook + 300 + count1;
-        else if(topic.equalsIgnoreCase("software development")|| topic.equalsIgnoreCase("software"))
-            this.IdOfBook = IdOfBook + 500 + count1;
-        else if (topic.equalsIgnoreCase("networks"))
-            this.IdOfBook = IdOfBook + 700 + count1;
-        else
-            this.IdOfBook = IdOfBook + 900 + count1;
+        super(title,YearOfPublishing,topic,1000);
         this.author = author;
         this.numOfPages = numOfPages;
         this.publisher = publisher;
-
-
     }
 
     Book( String title , int YearOfPublishing , String topic , int numOfPages, String publisher){
-        super(title,YearOfPublishing,topic);
-        if(topic.equalsIgnoreCase("basic science") || topic.equalsIgnoreCase("science"))
-            this.IdOfBook = IdOfBook + 100 + count1;
-        else if(topic.equalsIgnoreCase("ai")|| topic.equalsIgnoreCase("artificial intelligence"))
-            this.IdOfBook = IdOfBook + 300 + count1;
-        else if(topic.equalsIgnoreCase("software development")|| topic.equalsIgnoreCase("software"))
-            this.IdOfBook = IdOfBook + 500 + count1;
-        else if (topic.equalsIgnoreCase("networks"))
-            this.IdOfBook = IdOfBook + 700 + count1;
-        else
-            this.IdOfBook = IdOfBook + 900 + count1;
+        super(title,YearOfPublishing,topic,1000);
         this.numOfPages = numOfPages;
         this.publisher = publisher;
         this.author = "Anonymous author";
@@ -51,63 +26,34 @@ public class Book extends Item {
     }
 
     Book( String title , String topic ,String author, int numOfPages, String publisher){
-        super(title,2025,topic);
-        if(topic.equalsIgnoreCase("basic science") || topic.equalsIgnoreCase("science"))
-            this.IdOfBook = IdOfBook + 100 + count1;
-        else if(topic.equalsIgnoreCase("ai")|| topic.equalsIgnoreCase("artificial intelligence"))
-            this.IdOfBook = IdOfBook + 300 + count1;
-        else if(topic.equalsIgnoreCase("software development")|| topic.equalsIgnoreCase("software"))
-            this.IdOfBook = IdOfBook + 500 + count1;
-        else if (topic.equalsIgnoreCase("networks"))
-            this.IdOfBook = IdOfBook + 700 + count1;
-        else
-            this.IdOfBook = IdOfBook + 900 + count1;
+        super(title,2025,topic,1000);
         this.author = author;
         this.numOfPages = numOfPages;
         this.publisher = publisher;
 
     }
     Book( String title , int YearOfPublishing , String topic ,String author, int numOfPages){
-        super(title,YearOfPublishing,topic);
-        if(topic.equalsIgnoreCase("basic science") || topic.equalsIgnoreCase("science"))
-            this.IdOfBook = IdOfBook + 100 + count1;
-        else if(topic.equalsIgnoreCase("ai")|| topic.equalsIgnoreCase("artificial intelligence"))
-            this.IdOfBook = IdOfBook + 300 + count1;
-        else if(topic.equalsIgnoreCase("software development")|| topic.equalsIgnoreCase("software"))
-            this.IdOfBook = IdOfBook + 500 + count1;
-        else if (topic.equalsIgnoreCase("networks"))
-            this.IdOfBook = IdOfBook + 700 + count1;
-        else
-            this.IdOfBook = IdOfBook + 900 + count1;
+        super(title,YearOfPublishing,topic,1000);
+
         this.author = author;
         this.numOfPages = numOfPages;
         this.publisher = "Anonymous Publisher";
     }
 
     Book( String title , int YearOfPublishing , String topic , int numOfPages){
-        super(title,YearOfPublishing,topic);
-        if(topic.equalsIgnoreCase("basic science") || topic.equalsIgnoreCase("science"))
-            this.IdOfBook = IdOfBook + 100 + count1;
-        else if(topic.equalsIgnoreCase("ai")|| topic.equalsIgnoreCase("artificial intelligence"))
-            this.IdOfBook = IdOfBook + 300 + count1;
-        else if(topic.equalsIgnoreCase("software development")|| topic.equalsIgnoreCase("software"))
-            this.IdOfBook = IdOfBook + 500 + count1;
-        else if (topic.equalsIgnoreCase("networks"))
-            this.IdOfBook = IdOfBook + 700 + count1;
-        else
-            this.IdOfBook = IdOfBook + 900 + count1;
+        super(title,YearOfPublishing,topic,1000);
         this.numOfPages = numOfPages;
         this.publisher = "Anonymous Publisher";
         this.author = "Anonymous author";
     }
 
     Book(){
-        super("NO Name ",2025,"no assigned topic");
+        super("NO Name ",2025,"no assigned topic",1000);
         this.author = "Anonymous author";
         this.numOfPages = 200;
         this.publisher = "Anonymous Publisher";
         this.author = "Anonymous author ";
-        this.IdOfBook = IdOfBook + 900 + count1;
+
 
     }
 
@@ -122,17 +68,13 @@ public class Book extends Item {
     void info(){
 
     }
-
-
-
-
     @Override
     String getInfo() {
         System.out.println(super.toString());
         return "Book{" +
-                "author='" + author + '\'' +
-                ", numOfPages=" + numOfPages +
-                ", publisher='" + publisher + '\'' +
+                "author= '" + author + '\'' +
+                ", numOfPages= " + numOfPages +
+                ", publisher= '" + publisher + '\'' +
                 '}';
     }
 }
