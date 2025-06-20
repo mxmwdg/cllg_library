@@ -6,7 +6,7 @@ public class Main {
         Scanner in = new Scanner(System.in);
         Date date1 = new Date(25, 8,2015);
         Date date2 = new Date(29, 8,2015);
-        Item book = new Book("Choco", 1990 ,"basic science","ahmad ",99,"Sa33ed ");
+        Book book = new Book("Choco", 1990 ,"basic science","ahmad ",99,"Sa33ed ");
         Item book2 = new Book("coco", 1990 ,"Ai","ahmad ",99,"Sa33ed ");
 
         Book book3 = new Book("boo", 1990 ,"Ai","ahmad ",99,"Sa33ed ");
@@ -17,7 +17,8 @@ public class Main {
 //        Item proj = new Project("haz ", 3 ,true , 2020 ,  );
 
         l.RegisterItem(book2);
-        l.RegisterItem(book);
+
+        l.RegisterBook(book);
         l.RegisterItem(book3);
         l.RegisterItem(book4);
         Member m = new Member("Amin");
@@ -29,6 +30,8 @@ public class Main {
         l.ItemLend(m1,book,date2);
         l.ItemLend(m1,book2,date2);
         l.SearchForAnItem(3);
+        l.SearchForAnItem(4);
+        book.getInfo();
 
         /*l.RegisterMember(m);
         System.out.println("please enter your name: ");

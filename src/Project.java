@@ -2,7 +2,7 @@ import java.util.Arrays;
 
 public class Project extends Item {
     int IdOfProject = 2000;
-    static int count2 = 0;
+    private static int count2 = 0;
     int projectYear;
     String[] team = {"no name members"};
 

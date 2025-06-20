@@ -1,6 +1,6 @@
 public class Book extends Item {
     int IdOfBook=1000;
-    int count1=0;
+    private static int count1=0;
     String author;
     int numOfPages;
     String publisher;
