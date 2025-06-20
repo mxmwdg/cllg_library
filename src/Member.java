@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Member {
@@ -10,7 +11,6 @@ public class Member {
     ArrayList<Date> DateOfReturning = new ArrayList<>();
     //for the 3 items limit, because they want the date of borrow/return. It makes so you can see each member's history.
     private boolean signedIn = false;
-    private boolean isLate;
 
 
     Member(String name){
@@ -29,16 +29,22 @@ public class Member {
     }
 
 
-    void BorrowItem(Item item, Date dateOfBorrowing ){
+    void BorrowItem(Item item){
         BorrowedItems.add(item);
         BorrowedItemsHistory.add(item);
-        DateOfBorrowing.add(dateOfBorrowing);
+        LocalDate currantDate = LocalDate.now();
+        Date now = new Date(currantDate.getDayOfMonth(),currantDate.getDayOfMonth(),currantDate.getYear());
+        DateOfBorrowing.add(now);
     }
 
     /**you can make it harder by making multiple borrows/returns at the same time possible**/
 
-    void ReturnItem(Item item, Date dateOfReturning){
-        DateOfReturning.add(dateOfReturning);
+    void ReturnItem(Item item){
+        LocalDate currantDate = LocalDate.now();
+        Date now = new Date(currantDate.getDayOfMonth(),currantDate.getDayOfMonth(),currantDate.getYear());
+        DateOfReturning.add(now);
+        DateOfBorrowing.remove(BorrowedItems.indexOf(item));
+        BorrowedItems.remove(item);
     }
 
     int getNumberOfBorrowedItems(){
@@ -53,7 +59,7 @@ public class Member {
     }
 
     boolean equals(Member tempMember){
-        return this.registrationNumber == tempMember.registrationNumber && this.name.toLowerCase().equals(tempMember.name.toLowerCase());
+        return this.registrationNumber == tempMember.registrationNumber && this.name.equalsIgnoreCase(tempMember.name);
 
 
     }

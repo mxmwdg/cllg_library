@@ -135,9 +135,9 @@ public class Library {
                     item.borrow();
                     System.out.println(item.title + " " + "is Borrowed in " + dateOfBorrowing.day + '/' + dateOfBorrowing.month + '/' + dateOfBorrowing.year + " by " + member.name + " !");
                     System.out.println("!Note : The borrowing time allowed is only 7 days ");
-                    member.BorrowItem(item, dateOfBorrowing);
+                    member.BorrowItem(item);
                 }
-                //Date date = new Date(day,month,year);
+
             } else
                 System.out.println("!! Sorry , You can't borrow more than three items." + "\n" +
                         "You have to return an item first.");
@@ -159,18 +159,17 @@ public class Library {
                 break ReturningBlock;
             }
 
-            member.ReturnItem(item, dateOfReturning);
+            member.ReturnItem(item);
             item.setAvailable();
             System.out.println(item.title + " is returned successfully in " + dateOfReturning.day + '/' + dateOfReturning.month + '/' + dateOfReturning.year + " by " + member.name + " !");
-            member.ReturnItem(item, dateOfReturning);
         }
     }
 
     //7 day check and penalise if returned too late
-    boolean ReturnedLate() {
+    boolean ReturnedLate(Date borrowDate) {
         LocalDate currantDate = LocalDate.now();
-        //if(Date.TimeElapsedBetweenTwoDates() > 7)
-        return false;
+        Date now = new Date(currantDate.getDayOfMonth(),currantDate.getDayOfMonth(),currantDate.getYear());
+        return Date.TimeElapsedBetweenTwoDates(borrowDate, now) > 7;
     }
     //3 items borrowed limiter
     boolean MemberIsAbleToBorrow(Member member) {
@@ -193,7 +192,6 @@ public class Library {
 
 
             }
-
         }
     }
 
@@ -340,7 +338,17 @@ public class Library {
             }
         }
     }
-
+    void PenaliseMembers(){
+        for(Member member : listOfMembers){
+            for(Date borrowDate : member.DateOfBorrowing){
+                if(ReturnedLate(borrowDate)){
+                    listOfPenalisedMembers.add(member);
+                    listOfMembers.remove(member);
+                    break;
+                }
+            }
+        }
+    }
 }
 
 
