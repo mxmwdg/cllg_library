@@ -7,23 +7,28 @@ public class Main {
         Date date1 = new Date(25, 8,2015);
         Date date2 = new Date(29, 8,2015);
         Item book = new Book("Choco", 1990 ,"basic science","ahmad ",99,"Sa33ed ");
-        Item book2 = new Book("coco", 1990 ,"hah","ahmad ",99,"Sa33ed ");
+        Item book2 = new Book("coco", 1990 ,"Ai","ahmad ",99,"Sa33ed ");
 
-        Book book3 = new Book("boo", 1990 ,"hah","ahmad ",99,"Sa33ed ");
-        Item book4 = new Book("joo", 1990 ,"hah","ahmad ",99,"Sa33ed ");
+        Book book3 = new Book("boo", 1990 ,"Ai","ahmad ",99,"Sa33ed ");
+        Item book4 = new Book("joo", 1990 ,"Basic Science","ahmad ",99,"Sa33ed ");
         Library l =new Library();
 
-        String []a ;
+//        String []a ;
 //        Item proj = new Project("haz ", 3 ,true , 2020 ,  );
 
-        l.RegisterItem();
-        l.RegisterItem();
+        l.RegisterItem(book2);
+        l.RegisterItem(book);
+        l.RegisterItem(book3);
+        l.RegisterItem(book4);
         Member m = new Member("Amin");
         Member m1= new Member("Bilal");
         l.RegisterMember(m);
         l.RegisterMember(m1);
 
+
         l.ItemLend(m1,book,date2);
+        l.ItemLend(m1,book2,date2);
+        l.SearchForAnItem(3);
 
         /*l.RegisterMember(m);
         System.out.println("please enter your name: ");

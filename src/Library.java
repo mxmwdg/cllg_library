@@ -18,33 +18,52 @@ public class Library {
         this.listOfMembers = list0fMembers;
     }
 
-    void RegisterItem() {
+    void RegisterItem(Item item) {
         System.out.println("What type of item do you want to register ? \n 1.for Book \n 2.for Project");
         int n =in.nextInt();
         if(n==1) {
-
-            Book book = new Book();
-            if (listOfBooks.contains(book)) {
-                System.out.println("! We already have the " + book.title + " in our library ");
-            } else {
-                listOfBooks.add(book);
-                System.out.println(book.title + " is registered successfully !");
+              RegisterBook((Book)item);
+//            Book book = new Book();
+//            if (listOfBooks.contains(book)) {
+//                System.out.println("! We already have the " + book.title + " in our library ");
+//            } else {
+//                listOfBooks.add(book);
+//                System.out.println(book.title + " is registered successfully !");
             }
-        }
+
         else if(n==2){
-
-            Project project = new Project();
-            if (listOfProjects.contains(project)) {
-                System.out.println("! We already have the " + project.title + " in our library ");
-            } else {
-                listOfProjects.add(project);
-                System.out.println(project.title + " is registered successfully !");
-            }
+              RegisterProject((Project)item);
+//            Project project = new Project();
+//            if (listOfProjects.contains(project)) {
+//                System.out.println("! We already have the " + project.title + " in our library ");
+//            } else {
+//                listOfProjects.add(project);
+//                System.out.println(project.title + " is registered successfully !");
+//            }
 
             }
         else
             System.out.println("Wrong Number ");
         }
+
+
+     void RegisterBook(Book item) {
+        if (listOfBooks.contains(item)) {
+            System.out.println("! We already have the " + item.title + " in our library ");
+        } else {
+            listOfBooks.add(item);
+            System.out.println(item.title + " is registered successfully !");
+        }
+     }
+
+    void RegisterProject(Project item) {
+        if (listOfProjects.contains(item)) {
+            System.out.println("! We already have the " + item.title + " in our library ");
+        } else {
+            listOfProjects.add(item);
+            System.out.println(item.title + " is registered successfully !");
+        }
+    }
 
     /*void RegisterMember(){
         System.out.println("please enter your name: ");
@@ -91,17 +110,17 @@ public class Library {
     void ItemLend(Member member, Item item, Date dateOfBorrowing) {
         BorrowingBlock:
         {
-            if (!listOfItems.contains(item) && !listOfMembers.contains(member)) {
+            if (!listOfBooks.contains(item) || !listOfProjects.contains(item) && !listOfMembers.contains(member )) {
                 System.out.println("!! Sorry something went wrong ");
             }
             /* ************listOfMembers.get(memberInt).isSignedIn()****************** */
             if (!listOfMembers.contains(member)) {
                 System.out.println("! Mr. " + member.name + " is not registered in our system ");
             }
-            if (!listOfItems.contains(item)) {
+            if (!listOfBooks.contains(item) && !listOfProjects.contains(item)) {
                 System.out.println("! The " + item.title + " is not registered in our system ");
             }
-            if (!listOfItems.contains(item) || !listOfMembers.contains(member)) {
+        if ((!listOfBooks.contains(item) && !listOfProjects.contains(item)) || !listOfMembers.contains(member) ) {
                 break BorrowingBlock;
             }
 
