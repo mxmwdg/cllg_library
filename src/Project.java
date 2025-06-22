@@ -2,7 +2,7 @@ import java.util.Arrays;
 
 public class Project extends Item {
     int IdOfProject = 2000;
-    static int count2 = 0;
+    private static int count2 = 0;
     int projectYear;
     String[] team = {"no name members"};
 
@@ -14,22 +14,12 @@ public class Project extends Item {
     }
 
     Project( String title, int yearOfPublishing, String topic, int projectYear, String[] team) {
-        super(title, yearOfPublishing, topic);
-        if(topic.equalsIgnoreCase("basic science") || topic.equalsIgnoreCase("science"))
-            this.IdOfProject = IdOfProject + 100 + count2;
-        else if(topic.equalsIgnoreCase("ai")|| topic.equalsIgnoreCase("artificial intelligence"))
-            this.IdOfProject = IdOfProject + 300 + count2;
-        else if(topic.equalsIgnoreCase("software development")|| topic.equalsIgnoreCase("software"))
-            this.IdOfProject = IdOfProject + 500 + count2;
-        else if (topic.equalsIgnoreCase("networks"))
-            this.IdOfProject = IdOfProject + 700 + count2;
-        else
-            this.IdOfProject = IdOfProject + 900 + count2;
+        super(title, yearOfPublishing, topic,2000);
         this.team = team;
         this.projectYear = projectYear;
     }
     public Project() {
-            super( "No Name", 2025, "no topic assigned");
+            super( "No Name", 2025, "no topic assigned",2000);
             this.projectYear = 3;
             for (String s : this.team)
                 s = "null";
@@ -42,50 +32,29 @@ public class Project extends Item {
     }
 
     public Project(String title, String topic, int projectYear, String[] team){
-            super( title, 2025, topic);
+            super( title, 2025, topic ,2000);
             this.projectYear = projectYear;
             this.team = team;
-        if(topic.equalsIgnoreCase("basic science") || topic.equalsIgnoreCase("science"))
-            this.IdOfProject = IdOfProject + 100 + count2;
-        else if(topic.equalsIgnoreCase("ai")|| topic.equalsIgnoreCase("artificial intelligence"))
-            this.IdOfProject = IdOfProject + 300 + count2;
-        else if(topic.equalsIgnoreCase("software development")|| topic.equalsIgnoreCase("software"))
-            this.IdOfProject = IdOfProject + 500 + count2;
-        else if (topic.equalsIgnoreCase("networks"))
-            this.IdOfProject = IdOfProject + 700 + count2;
-        else
-            this.IdOfProject = IdOfProject + 900 + count2;
         }
 
     public Project(  String title,int yearOfPublishing, String topic, int projectYear){
-            super( title, yearOfPublishing, topic);
+            super( title, yearOfPublishing, topic,2000);
             this.projectYear = projectYear;
 
             for (String s : this.team)
                 s = "null";
-        if(topic.equalsIgnoreCase("basic science") || topic.equalsIgnoreCase("science"))
-            this.IdOfProject = IdOfProject + 100 + count2;
-        else if(topic.equalsIgnoreCase("ai")|| topic.equalsIgnoreCase("artificial intelligence"))
-            this.IdOfProject = IdOfProject + 300 + count2;
-        else if(topic.equalsIgnoreCase("software development")|| topic.equalsIgnoreCase("software"))
-            this.IdOfProject = IdOfProject + 500 + count2;
-        else if (topic.equalsIgnoreCase("networks"))
-            this.IdOfProject = IdOfProject + 700 + count2;
-        else
-            this.IdOfProject = IdOfProject + 900 + count2;
         }
 
     public Project(  String title,int yearOfPublishing, int projectYear, String[] team){
-        super( title, yearOfPublishing, "No topic assigned");
+        super( title, yearOfPublishing, "No topic assigned",2000);
         this.projectYear = projectYear;
         this.team = team;
-        this.IdOfProject = IdOfProject + 900 + count2;
         }
 
 
 
     public Project(String title, int projectYear){
-            super( title, 2025, "no assigned topic");
+            super( title, 2025, "no assigned topic",2000);
             this.projectYear = projectYear;
             for (String s : this.team)
                 s = "null";
