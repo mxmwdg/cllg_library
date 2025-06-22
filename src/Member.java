@@ -8,7 +8,8 @@ public class Member {
     ArrayList<Item> BorrowedItems = new ArrayList<>();
     ArrayList<Item> BorrowedItemsHistory = new ArrayList<>();
     ArrayList<Date> DateOfBorrowing = new ArrayList<>();
-    ArrayList<Date> DateOfReturning = new ArrayList<>();
+    ArrayList<Date> DatesOfBorrows = new ArrayList<>();
+    ArrayList<Date> DatesOfReturns = new ArrayList<>();
     //for the 3 items limit, because they want the date of borrow/return. It makes so you can see each member's history.
     private boolean signedIn = false;
 
@@ -35,6 +36,7 @@ public class Member {
         LocalDate currantDate = LocalDate.now();
         Date now = new Date(currantDate.getDayOfMonth(),currantDate.getDayOfMonth(),currantDate.getYear());
         DateOfBorrowing.add(now);
+        DatesOfBorrows.add(now);
     }
 
     /**you can make it harder by making multiple borrows/returns at the same time possible**/
@@ -42,7 +44,7 @@ public class Member {
     void ReturnItem(Item item){
         LocalDate currantDate = LocalDate.now();
         Date now = new Date(currantDate.getDayOfMonth(),currantDate.getDayOfMonth(),currantDate.getYear());
-        DateOfReturning.add(now);
+        DatesOfReturns.add(now);
         DateOfBorrowing.remove(BorrowedItems.indexOf(item));
         BorrowedItems.remove(item);
     }
