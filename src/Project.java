@@ -1,7 +1,7 @@
 import java.util.Arrays;
 
 public class Project extends Item {
-    int IdOfProject = 2000;
+    int typeNum = 2000;
     private static int count2 = 0;
     int projectYear;
     String[] team = {"no name members"};
@@ -9,7 +9,7 @@ public class Project extends Item {
 
     Project(String title) {
         super(title);
-        IdOfProject = IdOfProject + count2;
+
         count2 = count2 + 1;
     }
 
@@ -23,13 +23,9 @@ public class Project extends Item {
             this.projectYear = 3;
             for (String s : this.team)
                 s = "null";
-        this.IdOfProject = IdOfProject + 900 + count2;
-
         }
 
-    public int getIdOfProject() {
-        return IdOfProject;
-    }
+
 
     public Project(String title, String topic, int projectYear, String[] team){
             super( title, 2025, topic ,2000);

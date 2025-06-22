@@ -14,15 +14,15 @@ public abstract class Item {
         this.available = true;
         count = count + 1;
         if(topic.equalsIgnoreCase("basic science") || topic.equalsIgnoreCase("science"))
-            this.id = id + 100 + count;
+            this.id = id + 100 + count + typeNum;
         else if(topic.equalsIgnoreCase("ai")|| topic.equalsIgnoreCase("artificial intelligence"))
-            this.id = id + 300 + count;
+            this.id = id + 300 + count + typeNum;
         else if(topic.equalsIgnoreCase("software development")|| topic.equalsIgnoreCase("software"))
-            this.id = id + 500 + count;
+            this.id = id + 500 + count + typeNum;
         else if (topic.equalsIgnoreCase("networks"))
-            this.id = id + 700 + count;
+            this.id = id + 700 + count + typeNum;
         else
-            this.id = id + 900 + count;
+            this.id = id + 900 + count + typeNum;
     }
 
     public Item(String title) {

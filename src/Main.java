@@ -18,25 +18,29 @@ public class Main {
         Item book4 = new Book("joo", 1990 ,"Basic Science","ahmad ",99,"Sa33ed ");
         Library l =new Library();
 
-//        String []a ;
+//        String []a ;1
+
 //        Item proj = new Project("haz ", 3 ,true , 2020 ,  );
 
         l.RegisterItem(book2);
 
         l.RegisterBook(book);
-        l.RegisterItem(book3);
-        l.RegisterItem(book4);
-        Member m = new Member("Amin");
-        Member m1= new Member("Bilal");
-        l.RegisterMember(m);
-        l.RegisterMember(m1);
+//        l.RegisterItem(book3);
+//        l.RegisterItem(book4);
+  //      Member m = new Member("Amin");
+    //    Member m1= new Member("Bilal");
+      //  l.RegisterMember(m);
+       // l.RegisterMember(m1);
+
+        System.out.println(book.id);
 
 
-        l.ItemLend(m1,book,date2);
-        l.ItemLend(m1,book2,date2);
+
+      //  l.ItemLend(m1,book,date2);
+      //  l.ItemLend(m1,book2,date2);
         l.SearchForAnItem(3);
-        l.SearchForAnItem(4);
-        book.getInfo();
+
+//        book.getInfo();
 
         /*l.RegisterMember(m);
         System.out.println("please enter your name: ");

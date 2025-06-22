@@ -5,7 +5,6 @@ public class Book extends Item {
     int typeNum = 1000;
 
 
-
     Book(String title){
         super(title);
     }
@@ -65,8 +64,9 @@ public class Book extends Item {
      void borrow(){
         super.setAvailable(false);
      }
-    void info(){
+    int getId(){
 
+       return this.id;
     }
     @Override
     String getInfo() {
@@ -75,6 +75,7 @@ public class Book extends Item {
                 "author= '" + author + '\'' +
                 ", numOfPages= " + numOfPages +
                 ", publisher= '" + publisher + '\'' +
-                '}';
+                ", id= '" + id +
+                '}' ;
     }
 }

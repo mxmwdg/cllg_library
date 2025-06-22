@@ -21,6 +21,7 @@ public class Library {
     void RegisterItem(Item item) {
         System.out.println("What type of item do you want to register ? \n 1.for Book \n 2.for Project");
         int n =in.nextInt();
+
         if(n==1) {
 
 //            Book book = new Book();
@@ -30,6 +31,7 @@ public class Library {
 //                listOfBooks.add(book);
 //                System.out.println(book.title + " is registered successfully !");
             RegisterBook((Book)item);
+
             }
 
         else if(n==2){
@@ -62,6 +64,7 @@ public class Library {
             System.out.println("! We already have the " + item.title + " in our library ");
         } else {
             listOfProjects.add(item);
+            listOfItems.add(item);
             System.out.println(item.title + " is registered successfully !");
         }
     }
@@ -202,6 +205,7 @@ public class Library {
                 for (Book book : listOfBooks) {
                     book.getInfo();
                 }
+                break;
             }
             //every project selected by year
             case 2: {
@@ -212,6 +216,7 @@ public class Library {
                         project.getInfo();
                     }
                 }
+                break;
             }
             //every item selected by topics
             case 3: {
@@ -219,6 +224,7 @@ public class Library {
                 System.out.println("1.basic science  2.AI  3.software development  4.networks");
                 int c = in.nextInt();
                 SearchForItemsByTopics(c);
+                break;
             }
             //every available project by topic
             case 4: {
@@ -226,6 +232,7 @@ public class Library {
                 System.out.println("1.basic science  2.AI  3.software development  4.networks");
                 int c = in.nextInt();
                 SearchForProjectsByTopic(c);
+                break;
             }
             //every unavailable book / every lent book
             case 5:{
@@ -234,6 +241,7 @@ public class Library {
                         book.getInfo();
                     }
                 }
+                break;
             }
             //search for a certain book or project by id or title or topic
             case 6:{
@@ -248,25 +256,30 @@ public class Library {
                             if(m.id == n )
                                 m.getInfo();
                         });
-
+                        break;
                     }
                     case 2: {
                         System.out.println("enter the title:");
                         String s = in.next();
                         listOfItems.forEach(item -> {if(item.title.equalsIgnoreCase(s)) item.getInfo();});
+                        break;
                     }
                     case 3: {
                         System.out.println("Select the the topic of the items you want to view : ");
                         System.out.println("1.basic science  2.AI  3.software development  4.networks");
                         int choice = in.nextInt();
                         SearchForItemsByTopics(choice);
+                        break;
                     }
                     default:
                         System.out.println("wrong input");
+                        break;
                 }
+                break;
             }
             default:
                 System.out.println("wrong input");
+                break;
         }
     }
 
@@ -275,31 +288,35 @@ public class Library {
             switch (c) {
                 case 1: {
                     for (Project project : listOfProjects) {
-                        if (project.IdOfProject >= 2100 && project.IdOfProject < 2300 && project.IsAvailable()) {
+                        if (project.id >= 2100 && project.id < 2300 && project.IsAvailable()) {
                             project.getInfo();
                         }
                     }
+                    break;
                 }
                 case 2: {
                     for (Project project : listOfProjects) {
-                        if (project.IdOfProject >= 2300 && project.IdOfProject < 2500 && project.IsAvailable()) {
+                        if (project.id >= 2300 && project.id < 2500 && project.IsAvailable()) {
                             project.getInfo();
                         }
                     }
+                    break;
                 }
                 case 3: {
                     for (Project project : listOfProjects) {
-                        if (project.IdOfProject >= 2500 && project.IdOfProject < 2700 && project.IsAvailable()) {
+                        if (project.id >= 2500 && project.id < 2700 && project.IsAvailable()) {
                             project.getInfo();
                         }
                     }
+                    break;
                 }
                 case 4: {
                     for (Project project : listOfProjects) {
-                        if (project.IdOfProject >= 2900 && project.IsAvailable()) {
+                        if (project.id >= 2900 && project.IsAvailable()) {
                             project.getInfo();
                         }
                     }
+                    break;
                 }
             }
 
@@ -312,28 +329,28 @@ public class Library {
                         if (item.id >= 1100 && item.id < 1300 || item.id >= 2100 && item.id < 2300 )  {
                             item.getInfo();
                         }
-                    }
+                    }break;
                 }
                 case 2: {
                     for (Item item : listOfItems) {
                         if (item.id >= 1300 && item.id < 1500 || item.id >= 2300 && item.id < 2500 )  {
                             item.getInfo();
                         }
-                    }
+                    } break;
                 }
                 case 3: {
                     for (Item item : listOfItems) {
                         if (item.id >= 1500 && item.id < 1700 || item.id >= 2500 && item.id < 2700 )  {
                             item.getInfo();
                         }
-                    }
+                    } break;
                 }
                 case 4: {
                     for (Item item : listOfItems) {
                         if (item.id >= 1900 && item.id < 2000 || item.id >= 2900)  {
                             item.getInfo();
                         }
-                    }
+                    }break;
                 }
             }
         }
