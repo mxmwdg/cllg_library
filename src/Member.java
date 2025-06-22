@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Member {
@@ -6,8 +7,8 @@ public class Member {
     static int count = 0;
     ArrayList<Item> BorrowedItems = new ArrayList<>();
     ArrayList<Item> BorrowedItemsHistory = new ArrayList<>();
-    ArrayList<Date> DateOfBorrowing = new ArrayList<>();
-    ArrayList<Date> DateOfReturning = new ArrayList<>();
+    ArrayList<LocalDate> DateOfBorrowing = new ArrayList<>();
+    ArrayList<LocalDate> DateOfReturning = new ArrayList<>();
     //for the 3 items limit, because they want the date of borrow/return. It makes so you can see each member's history.
     private boolean signedIn = false;
     private boolean isLate;
@@ -29,7 +30,7 @@ public class Member {
     }
 
 
-    void BorrowItem(Item item, Date dateOfBorrowing ){
+    void BorrowItem(Item item, LocalDate dateOfBorrowing ){
         BorrowedItems.add(item);
         BorrowedItemsHistory.add(item);
         DateOfBorrowing.add(dateOfBorrowing);
@@ -37,7 +38,7 @@ public class Member {
 
     /**you can make it harder by making multiple borrows/returns at the same time possible**/
 
-    void ReturnItem(Item item, Date dateOfReturning){
+    void ReturnItem(Item item, LocalDate dateOfReturning){
         DateOfReturning.add(dateOfReturning);
     }
 

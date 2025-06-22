@@ -107,7 +107,7 @@ public class Library {
     }
 
 
-    void ItemLend(Member member, Item item, Date dateOfBorrowing) {
+    void ItemLend(Member member, Item item, LocalDate dateOfBorrowing) {
         BorrowingBlock:
         {
             if (!listOfBooks.contains(item) || !listOfProjects.contains(item) && !listOfMembers.contains(member )) {
@@ -132,7 +132,7 @@ public class Library {
                     break MainIf;
                 } else {
                     item.borrow();
-                    System.out.println(item.title + " " + "is Borrowed in " + dateOfBorrowing.day + '/' + dateOfBorrowing.month + '/' + dateOfBorrowing.year + " by " + member.name + " !");
+                    System.out.println(item.title + " " + "is Borrowed in " + dateOfBorrowing.toString() + " by " + member.name + " !");
                     System.out.println("!Note : The borrowing time allowed is only 7 days ");
                     member.BorrowItem(item, dateOfBorrowing);
                 }
@@ -146,7 +146,7 @@ public class Library {
     }
 
     //check if the member has the book in the first place, or he could return a book he doesn't have.
-    void ItemReturned(Member member, Item item, Date dateOfReturning) {
+    void ItemReturned(Member member, Item item, LocalDate dateOfReturning) {
         ReturningBlock:
         {
             if (item.IsAvailable()) {
@@ -156,16 +156,24 @@ public class Library {
 
             member.ReturnItem(item, dateOfReturning);
             item.setAvailable();
-            System.out.println(item.title + " is returned successfully in " + dateOfReturning.day + '/' + dateOfReturning.month + '/' + dateOfReturning.year + " by " + member.name + " !");
+            System.out.println(item.title + " is returned successfully in " +dateOfReturning.toString()+ " by " + member.name + " !");
             member.ReturnItem(item, dateOfReturning);
+        }
+        if(ReturnedLate(dateOfReturning)){
+            System.out.println("Meowwwwww");
         }
     }
 
     //7 day check and penalise if returned too late
-    boolean ReturnedLate() {
+
+
+    boolean ReturnedLate( LocalDate dateOfReturning) {
         LocalDate currantDate = LocalDate.now();
         //if(Date.TimeElapsedBetweenTwoDates() > 7)
-        return false;
+        int  x =  currantDate.compareTo(dateOfReturning);
+        if(x>7)
+             return true;
+        else return false ;
     }
 
     /*void showAllBooks(){
