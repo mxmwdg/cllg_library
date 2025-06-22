@@ -58,6 +58,7 @@ public class Library {
             System.out.println("! We already have the " + item.title + " in our library ");
         } else {
             listOfBooks.add(item);
+            listOfItems.add(item);
             System.out.println(item.title + " is registered successfully !");
         }
      }
@@ -218,7 +219,7 @@ public class Library {
             }
 
             member.ReturnItem(item);
-            item.setAvailable();
+            item.Return();
             System.out.println(item.title + " is returned successfully in " + dateOfReturning.day + '/' + dateOfReturning.month + '/' + dateOfReturning.year + " by " + member.name + " !");
         }
     }
