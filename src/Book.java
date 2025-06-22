@@ -64,10 +64,11 @@ public class Book extends Item {
      void borrow(){
         super.setAvailable(false);
      }
-    int getId(){
-
-       return this.id;
+     @Override
+     public int getId(){
+       return super.id;
     }
+
     @Override
     String getInfo() {
         System.out.println(super.toString());

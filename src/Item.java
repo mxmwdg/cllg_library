@@ -29,6 +29,7 @@ public abstract class Item {
         this.title=title;
     }
 
+    abstract public int getId();
 
 
     abstract void Return();
@@ -55,6 +56,7 @@ public abstract class Item {
                 ", topic='" + topic + '\'' +
 
                 ", available=" + available +
+                ", Id =" +this.getId()+
                 '}';
     }
 }

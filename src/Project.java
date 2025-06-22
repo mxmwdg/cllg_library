@@ -68,7 +68,10 @@ public class Project extends Item {
             super.setAvailable(false);
         }
 
-
+        @Override
+        public int getId(){
+        return this.id;
+        }
         @Override
         String getInfo () {
             System.out.println(super.toString());

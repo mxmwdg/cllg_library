@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.time.LocalDate;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Library {
     ArrayList<Item> listOfItems = new ArrayList<>();
@@ -31,11 +32,13 @@ public class Library {
 //                listOfBooks.add(book);
 //                System.out.println(book.title + " is registered successfully !");
             RegisterBook((Book)item);
+            listOfItems.add(item);
 
             }
 
         else if(n==2){
               RegisterProject((Project)item);
+              listOfItems.add(item);
 //            Project project = new Project();
 //            if (listOfProjects.contains(project)) {
 //                System.out.println("! We already have the " + project.title + " in our library ");
@@ -149,6 +152,58 @@ public class Library {
         }
     }
 
+
+
+    void ItemLend( Date dateOfBorrowing) {
+        AtomicBoolean found = new AtomicBoolean(false);
+
+            System.out.println("Enter Your Id");
+            int  mID = in.nextInt();
+            listOfMembers.forEach(member ->{
+                if(member.getRegistrationNumber() == mID) {
+                    this.ShowAllItems();
+                    System.out.println("Enter the ID of the item you want to borrow : ");
+                    int enteredId = in.nextInt();
+                    if(MemberIsAbleToBorrow(member)) {
+                        System.out.println("Here you go!");
+
+                        listOfItems.forEach(item -> {
+
+                            if (item.getId() == enteredId) {
+                                found.set(true);
+                                if(item.IsAvailable()){
+                                item.borrow();
+                                member.BorrowItem(item);
+                                System.out.println(item.title + " " + "is Borrowed in " + dateOfBorrowing.day + '/' + dateOfBorrowing.month + '/' + dateOfBorrowing.year + " by " + member.name + " !");
+                                System.out.println("!Note : The borrowing time allowed is only 7 days ");
+                                }
+                                else System.out.println("!! Sorry This Book Is Unavailable" + "\n" + " Please Choose Another Book");
+
+                            }
+
+                        });
+                        if(!found.get()){
+                            System.out.println("!! Wrong Id input");
+                        }
+
+                    }
+                    else {System.out.println("!! Sorry , You can't borrow more than three items." + "\n" +
+                            "You have to return an item first.");
+
+                    }
+                }
+                else{
+                        System.out.println("Sorry this member isn't registered in our system");
+                    }
+
+            });
+
+
+        }
+
+
+
+
     //check if the member has the book in the first place, or he could return a book he doesn't have.
     void ItemReturned(Member member, Item item, Date dateOfReturning) {
         ReturningBlock:
@@ -167,6 +222,7 @@ public class Library {
             System.out.println(item.title + " is returned successfully in " + dateOfReturning.day + '/' + dateOfReturning.month + '/' + dateOfReturning.year + " by " + member.name + " !");
         }
     }
+
 
     //7 day check and penalise if returned too late
     boolean ReturnedLate(Date borrowDate) {
@@ -192,11 +248,23 @@ public class Library {
                 }
             }
             case 3: {
+                listOfMembers.forEach(member -> {
+                    member.BorrowedItems.forEach(item -> {
+                        if( item.topic.equalsIgnoreCase("ai") || item.topic.equalsIgnoreCase("artificial intelligence"))
+                            System.out.println(member.getName() + " Has an Ai Book");
 
+                    });
+                });
 
             }
+            break;
         }
+
     }
+    void ShowAllItems(){
+        listOfItems.forEach(b ->{b.getInfo();});
+    }
+
 
     void SearchForAnItem(int optionNumber) {
         switch (optionNumber) {

@@ -23,22 +23,26 @@ public class Main {
 //        Item proj = new Project("haz ", 3 ,true , 2020 ,  );
 
         l.RegisterItem(book2);
-
-        l.RegisterBook(book);
+        in.reset();
+        l.RegisterItem(book);
+        Member m = new Member("Amin");
+        l.RegisterMember(m);
+        l.ItemLend(date1);
+        l.SearchForCertainMembers(3);
 //        l.RegisterItem(book3);
 //        l.RegisterItem(book4);
-  //      Member m = new Member("Amin");
+
     //    Member m1= new Member("Bilal");
-      //  l.RegisterMember(m);
+
        // l.RegisterMember(m1);
 
-        System.out.println(book.id);
+//        System.out.println(book.id);
 
 
 
       //  l.ItemLend(m1,book,date2);
       //  l.ItemLend(m1,book2,date2);
-        l.SearchForAnItem(3);
+//        l.SearchForAnItem(3);
 
 //        book.getInfo();
 

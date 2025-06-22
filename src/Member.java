@@ -12,6 +12,9 @@ public class Member {
     //for the 3 items limit, because they want the date of borrow/return. It makes so you can see each member's history.
     private boolean signedIn = false;
 
+    public String getName() {
+        return name;
+    }
 
     Member(String name){
         registrationNumber = registrationNumber + count;
@@ -28,6 +31,9 @@ public class Member {
         this.name = "Samer <3";
     }
 
+    public int getRegistrationNumber() {
+        return registrationNumber;
+    }
 
     void BorrowItem(Item item){
         BorrowedItems.add(item);
