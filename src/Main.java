@@ -1,23 +1,48 @@
-
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
+
         Date date1 = new Date(25, 8,2015);
         Date date2 = new Date(29, 8,2015);
-        Item book = new Book(2,"Choco", 1990 ,"hah","ahmad ",99,"Sa33ed ",true);
-        Item book2 = new Book(2,"coco", 1990 ,"hah","ahmad ",99,"Sa33ed ",true);
+        Book book = new Book("Choco", 1990 ,"basic science","ahmad ",99,"Sa33ed ");
+        Item book2 = new Book("coco", 1990 ,"Ai","ahmad ",99,"Sa33ed ");
 
-        Item book3 = new Book(2,"boo", 1990 ,"hah","ahmad ",99,"Sa33ed ",true);
-        Item book4 = new Book(2,"joo", 1990 ,"hah","ahmad ",99,"Sa33ed ",true);
+        Book book3 = new Book("boo", 1990 ,"Ai","ahmad ",99,"Sa33ed ");
+        Item book4 = new Book("joo", 1990 ,"Basic Science","ahmad ",99,"Sa33ed ");
         Library l =new Library();
-        l.RegisterItem(book);
 
-        Member m = new Member("amin");
-        Member m1= new Member("Amin");
+//        String []a ;1
+
+//        Item proj = new Project("haz ", 3 ,true , 2020 ,  );
+
+        l.RegisterItem(book2);
+        in.reset();
+        l.RegisterItem(book);
+        Member m = new Member("Amin");
+        Member m1 = new Member("Bilal");
         l.RegisterMember(m);
-        m.BorrowItem(book,date1);
+        l.ItemLend(date1);
+        l.SearchForCertainMembers(3);
+//        l.RegisterItem(book3);
+//        l.RegisterItem(book4);
+
+    //    Member m1= new Member("Bilal");
+
+       // l.RegisterMember(m1);
+
+//        System.out.println(book.id);
+
+
+
+      //  l.ItemLend(m1,book,date2);
+      //  l.ItemLend(m1,book2,date2);
+//        l.SearchForAnItem(3);
+
+//        book.getInfo();
 
         /*l.RegisterMember(m);
         System.out.println("please enter your name: ");
