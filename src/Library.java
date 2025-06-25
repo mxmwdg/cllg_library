@@ -73,45 +73,47 @@ public class Library {
         }
     }
 
-    /*void RegisterMember(){
+    int RegisterMember(){
         System.out.println("please enter your name: ");
         String name = in.next();
 
         Member member = new Member(name);
 
-        if (listOfMembers.contains(member)){
-            System.out.println("! Mr ." + member.name + " is already registered in our system ");
-        }
-        else{
+
             listOfMembers.add(member);
         System.out.println(member.name + " is registered successfully !");
         System.out.println("Your registration number is: " + member.registrationNumber);
         member.setSignedIn(true);
-        }
-    }*/
+        return member.getRegistrationNumber();
+    }
 
     void RegisterMember(Member member) {
         if (listOfMembers.contains(member)) {
             System.out.println("! Mr ." + member.name + " is already registered in our system ");
         } else {
             listOfMembers.add(member);
-            System.out.println(member.name + " is registered successfully !");
-            System.out.println("Your registration number is: " + member.registrationNumber);
-            member.setSignedIn(true);
         }
     }
 
-    void SignIn(Member currantUser) {
+    int SignIn() {
+        System.out.println("enter your name: ");
+        String name = in.next();
+        System.out.println("enter your id: ");
+        int mId = in.nextInt();
+        Member currantUser = new Member(mId,name);
         for (Member member : listOfMembers) {
             if (member.equals(currantUser)) {
                 System.out.println("Hello Mr." + currantUser.name.toUpperCase());
                 member.setSignedIn(true);
                 currantUser.setSignedIn(true);
+                return mId;
             }
         }
         if (!currantUser.isSignedIn()) {
             System.out.println("wrong sign in information, please register if you aren't a member <3 ");
+
         }
+        return 0 ;
     }
 
 
@@ -156,51 +158,62 @@ public class Library {
 
 
     void ItemLend( Date dateOfBorrowing) {
-        AtomicBoolean found = new AtomicBoolean(false);
+        System.out.println("you have to sign up or log in first:");
+        System.out.println("1.sign up (you don't have an account)   2.log in (you already have an account");
+        int v = in.nextInt();
+        int mId =0;
+        if(v == 1){
+             mId = SignIn();
+            if(mId == 0 ) return;
+        }
+        else if (v == 2) {
+             mId = RegisterMember();
+        }
+        else
+            System.out.println("! wrong input");
 
-            System.out.println("Enter Your Id");
-            int  mID = in.nextInt();
-            listOfMembers.forEach(member ->{
-                if(member.getRegistrationNumber() == mID) {
-                    this.ShowAllItems();
+        for(Member member : listOfMembers){
+            if(mId == 0 ) return;
+            if (member.getRegistrationNumber() == mId) {
+                    ShowAllItems();
                     System.out.println("Enter the ID of the item you want to borrow : ");
                     int enteredId = in.nextInt();
-                    if(MemberIsAbleToBorrow(member)) {
+                    if (MemberIsAbleToBorrow(member)) {
                         System.out.println("Here you go!");
-
-                        listOfItems.forEach(item -> {
-
+                        boolean f = false;
+                        for (Item item : listOfItems) {
                             if (item.getId() == enteredId) {
-                                found.set(true);
-                                if(item.IsAvailable()){
-                                item.borrow();
-                                member.BorrowItem(item);
-                                System.out.println(item.title + " " + "is Borrowed in " + dateOfBorrowing.day + '/' + dateOfBorrowing.month + '/' + dateOfBorrowing.year + " by " + member.name + " !");
-                                System.out.println("!Note : The borrowing time allowed is only 7 days ");
-                                }
-                                else System.out.println("!! Sorry This Book Is Unavailable" + "\n" + " Please Choose Another Book");
-
+//                                found.set(true);
+                                f = true;
+                                if (item.IsAvailable()) {
+                                    item.borrow();
+                                    member.BorrowItem(item);
+                                    System.out.println(item.title + " " + "is Borrowed in " + dateOfBorrowing.day + '/' + dateOfBorrowing.month + '/' + dateOfBorrowing.year + " by " + member.name + " !");
+                                    System.out.println("!Note : The borrowing time allowed is only 7 days ");
+                                } else
+                                    System.out.println("!! Sorry This Book Is Unavailable" + "\n" + " Please Choose Another Book");
+                                break;
                             }
-
-                        });
-                        if(!found.get()){
+                        }
+                        if (!f) {
                             System.out.println("!! Wrong Id input");
                         }
 
-                    }
-                    else {System.out.println("!! Sorry , You can't borrow more than three items." + "\n" +
-                            "You have to return an item first.");
+                    } else {
+                        System.out.println("!! Sorry , You can't borrow more than three items." + "\n" +
+                                "You have to return an item first.");
 
                     }
+                } else {
+                    System.out.println("Sorry this member isn't registered in our system");
                 }
-                else{
-                        System.out.println("Sorry this member isn't registered in our system");
-                    }
 
-            });
-
-
+            }
         }
+
+
+
+
 
 
 
@@ -233,7 +246,7 @@ public class Library {
     }
     //3 items borrowed limiter
     boolean MemberIsAbleToBorrow(Member member) {
-        return member.getNumberOfBorrowedItems() < 3;
+        return member.getNumberOfBorrowedItems() < 3 && member.isSignedIn()&& !listOfPenalisedMembers.contains((member));
     }
 
     void SearchForCertainMembers(int optionNumber) {
@@ -346,9 +359,14 @@ public class Library {
                 }
                 break;
             }
+           // Show every item
+            case 7 :{
+                this.ShowAllItems();
+            }
             default:
                 System.out.println("wrong input");
                 break;
+
         }
     }
 

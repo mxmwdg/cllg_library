@@ -23,6 +23,7 @@ public class Main {
         in.reset();
         l.RegisterItem(book);
         Member m = new Member("Amin");
+        Member m1 = new Member("Bilal");
         l.RegisterMember(m);
         l.ItemLend(date1);
         l.SearchForCertainMembers(3);
