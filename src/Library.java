@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 import java.time.LocalDate;
 
@@ -10,9 +11,6 @@ public class Library {
     ArrayList<Member> listOfPenalisedMembers = new ArrayList<>();
     Scanner in = new Scanner(System.in);
     private int mId ;
-
-    public Library() {
-    }
 
     public Library(ArrayList<Item> listOfItems, ArrayList<Member> list0fMembers) {
         this.listOfItems = listOfItems;
@@ -96,11 +94,7 @@ public class Library {
         for(Member pMember : listOfPenalisedMembers){
             if(pMember.equals(currantUser)){
                 System.out.println("you have been have been removed from the library and all the books you've borrowed will be returned");
-                for(Item item : listOfItems){
-                    i = i + 1;
-                    item.Return();
-                    pMember.ReturnItem(listOfItems.remove(i));
-                }
+                pMember.removeAll();
                 return 0;
             }
         }

@@ -79,5 +79,11 @@ public class Member {
 
 
     }
+    void removeAll(){
+        for(Item item :BorrowedItems){
+            item.Return();
+        }
+        this.BorrowedItems.clear();
+    }
 
 }
