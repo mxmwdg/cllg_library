@@ -23,7 +23,11 @@ public class Member {
         this.name = name;
     }
     Member(int registrationNumber, String name ){
-        this.registrationNumber = registrationNumber;
+        if (registrationNumber != 0) {
+            this.registrationNumber = registrationNumber ;
+        } else {
+            this.registrationNumber = registrationNumber + 1;
+        }
         this.name = name;
     }
     Member(){

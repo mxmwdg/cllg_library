@@ -10,6 +10,7 @@ public class Library {
     ArrayList<Member> listOfMembers = new ArrayList<>();
     ArrayList<Member> listOfPenalisedMembers = new ArrayList<>();
     Scanner in = new Scanner(System.in);
+    int mId ;
 
     public Library() {
     }
@@ -109,23 +110,23 @@ public class Library {
 
     //we will force the member to signIn/register when they want to borrow so this method should be changed
     void ItemLend() {
+        if(mId == 0){
         System.out.println("you have to sign up or log in first:");
         System.out.println("1.sign up (you don't have an account)   2.log in (you already have an account");
         int v = in.nextInt();
-        int mId =-1000;
         if(v == 2){
              mId = SignIn();
-            if(mId == -1000 ) return;
+             if(mId == 0) return;
         }
         else if (v == 1) {
              mId = RegisterMember();
         }
         else
             System.out.println("! wrong input");
-
+        }
         LocalDate now = LocalDate.now();
+
         for(Member member : listOfMembers){
-            if(mId == -1000 ) return;
             if (member.getRegistrationNumber() == mId) {
                 if (MemberIsAbleToBorrow(member)) {
                 System.out.println("\nHere are all the available items: ");
@@ -137,15 +138,15 @@ public class Library {
                     for (Item item : listOfItems) {
                         if (item.getId() == enteredId) {
                             //f = true;
-                            if (item.IsAvailable()) {
+                            //if (item.IsAvailable()) {
                                 item.borrow();
                                 member.BorrowItem(item);
                                 System.out.println(item.title + " " + "is Borrowed in " + now.toString() + " by " + member.name + " !");
                                 System.out.println("!Note : The borrowing time allowed is only 7 days ");
-                                }
+                            /*    }
                             else
                                 System.out.println("!! Sorry This Book Is Unavailable" + "\n" + " Please Choose Another Book");
-                            break;
+                            break;*/
                         }
                     }
                     /*if (!f) {
@@ -162,21 +163,30 @@ public class Library {
 
 
     //check if the member has the book in the first place, or he could return a book he doesn't have.
-    void ItemReturned(Member member, Item item, Date dateOfReturning) {
+    void ItemReturned( ) {
+        LocalDate now = LocalDate.now();
+        if(mId == 0)
+            mId = SignIn();
         ReturningBlock:
         {
-            if (item.IsAvailable()) {
-                System.out.println("! " + item.title + " is already in the library");
-                break ReturningBlock;
+            for (Member member : listOfMembers) {
+                if(mId == member.getRegistrationNumber()){
+                    for(Item item : member.BorrowedItems){
+                        item.getInfo();
+                    }
+                    System.out.println("Enter the id of the item you want to return: ");
+                    int enteredId = in.nextInt();
+                    for(Item item : member.BorrowedItems){
+                        if(item.getId() == enteredId){
+                            member.ReturnItem(item);
+                            item.Return();
+                            System.out.println(item.title + " is returned successfully in " + now.toString() + " by " + member.name + " !");
+                        break;
+                        }
+                    }
+                break;
+                }
             }
-            if (member.BorrowedItems.contains(item)) {
-                System.out.println("! " + item.title + " is not in your possession");
-                break ReturningBlock;
-            }
-
-            member.ReturnItem(item);
-            item.Return();
-            System.out.println(item.title + " is returned successfully in " + dateOfReturning.day + '/' + dateOfReturning.month + '/' + dateOfReturning.year + " by " + member.name + " !");
         }
     }
 
@@ -219,7 +229,7 @@ public class Library {
 
     }
     void ShowAllItems(){
-        listOfItems.forEach(b ->{b.getInfo();});
+        listOfItems.forEach(Item::getInfo);
     }
     void ShowAllAvailableItems(){
         listOfItems.forEach(b ->{if(b.IsAvailable())b.getInfo();});
