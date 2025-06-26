@@ -86,7 +86,7 @@ public class Library {
     }
 
     int SignIn() {
-
+        int i= 0 ;
         System.out.println("enter your name: ");
         String name = in.next();
         System.out.println("enter your id: ");
@@ -97,8 +97,9 @@ public class Library {
             if(pMember.equals(currantUser)){
                 System.out.println("you have been have been removed from the library and all the books you've borrowed will be returned");
                 for(Item item : listOfItems){
+                    i = i + 1;
                     item.Return();
-                    pMember.ReturnItem(item);
+                    pMember.ReturnItem(listOfItems.remove(i));
                 }
                 return 0;
             }

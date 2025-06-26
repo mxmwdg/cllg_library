@@ -59,7 +59,7 @@ public class Member {
         LocalDate currantDate = LocalDate.now();
         Date now = new Date(currantDate.getDayOfMonth(),currantDate.getDayOfMonth(),currantDate.getYear());
         DatesOfReturns.add(now);
-        DateOfBorrowing.remove(BorrowedItems.indexOf(item));
+        DateOfBorrowing.remove(BorrowedItems.indexOf(item) + 1);
         BorrowedItems.remove(item);
     }
 

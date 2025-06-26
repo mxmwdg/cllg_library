@@ -1,7 +1,5 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Scanner;
 
 public class Main {
@@ -24,9 +22,15 @@ public class Main {
         ArrayList<Item> items = new ArrayList<>();
         ArrayList<Book> books = new ArrayList<>();
         ArrayList<Project> projects = new ArrayList<>();
-
-        Collections.addAll(items, book2, book , book3, book4);
-        Collections.addAll(members,m , m1,pMember);
+        members.add(m);
+        members.add(m1);
+        members.add(pMember);
+        items.add(book);
+        items.add(book4);
+        items.add(book3);
+        items.add(book2);
+//        Collections.addAll(items, book2, book , book3, book4);
+//        Collections.addAll(members,m , m1,pMember);
 
         Library l =new Library(items,members);
 
