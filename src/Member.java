@@ -30,10 +30,14 @@ public class Member {
         }
         this.name = name;
     }
-    Member(){
-        registrationNumber = registrationNumber + count;
-        count = count + 1;
-        this.name = "Samer <3";
+    Member(Date date,Item item, String name , int registrationNumber){
+        this.name = name;
+        this.registrationNumber = registrationNumber;
+        BorrowedItems.add(item);
+        BorrowedItemsHistory.add(item);
+        item.borrow();
+        DateOfBorrowing.add(date);
+        DatesOfBorrows.add(date);
     }
 
     public int getRegistrationNumber() {
@@ -62,8 +66,8 @@ public class Member {
     int getNumberOfBorrowedItems(){
         return BorrowedItems.size();
     }
-    void setSignedIn(boolean signedIn){
-        this.signedIn = signedIn;
+    void setSignedIn(){
+        this.signedIn = true;
     }
 
     public boolean isSignedIn() {

@@ -18,6 +18,7 @@ public class Main {
 
         Member m = new Member("Amin");
         Member m1 = new Member("Bilal");
+        Member pMember = new Member(date1,book,"JJ" ,1);
 
         ArrayList<Member> members = new ArrayList<>();
         ArrayList<Item> items = new ArrayList<>();
@@ -25,11 +26,12 @@ public class Main {
         ArrayList<Project> projects = new ArrayList<>();
 
         Collections.addAll(items, book2, book , book3, book4);
-        Collections.addAll(members,m , m1);
+        Collections.addAll(members,m , m1,pMember);
 
         Library l =new Library(items,members);
-//        String []a ;
 
+
+        l.PenaliseMembers();
 //        Item proj = new Project("haz ", 3 ,true , 2020 ,  );
 
         l.ItemLend();

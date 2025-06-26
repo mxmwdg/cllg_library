@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.time.LocalDate;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Library {
     ArrayList<Item> listOfItems = new ArrayList<>();
@@ -10,7 +9,7 @@ public class Library {
     ArrayList<Member> listOfMembers = new ArrayList<>();
     ArrayList<Member> listOfPenalisedMembers = new ArrayList<>();
     Scanner in = new Scanner(System.in);
-    int mId ;
+    private int mId ;
 
     public Library() {
     }
@@ -82,21 +81,33 @@ public class Library {
         System.out.println(member.name + " is registered successfully !");
         System.out.println("Your registration number is: " + member.registrationNumber);
         System.out.println("You can now borrow three items at a time");
-        member.setSignedIn(true);
+        member.setSignedIn();
         return member.getRegistrationNumber();
     }
 
     int SignIn() {
+
         System.out.println("enter your name: ");
         String name = in.next();
         System.out.println("enter your id: ");
         int mId = in.nextInt();
         Member currantUser = new Member(mId,name);
+        //shut the program?
+        for(Member pMember : listOfPenalisedMembers){
+            if(pMember.equals(currantUser)){
+                System.out.println("you have been have been removed from the library and all the books you've borrowed will be returned");
+                for(Item item : listOfItems){
+                    item.Return();
+                    pMember.ReturnItem(item);
+                }
+                return 0;
+            }
+        }
         for (Member member : listOfMembers) {
             if (member.equals(currantUser)) {
                 System.out.println("Hello Mr." + currantUser.name.toUpperCase());
-                member.setSignedIn(true);
-                currantUser.setSignedIn(true);
+                member.setSignedIn();
+                currantUser.setSignedIn();
                 return mId;
             }
         }
@@ -167,6 +178,7 @@ public class Library {
         LocalDate now = LocalDate.now();
         if(mId == 0)
             mId = SignIn();
+
         ReturningBlock:
         {
             for (Member member : listOfMembers) {
@@ -183,6 +195,7 @@ public class Library {
                             System.out.println(item.title + " is returned successfully in " + now.toString() + " by " + member.name + " !");
                         break;
                         }
+
                     }
                 break;
                 }
@@ -399,11 +412,11 @@ public class Library {
         }
     }
     void PenaliseMembers(){
-        for(Member member : listOfMembers){
-            for(Date borrowDate : member.DateOfBorrowing){
+        for(int i = 0 ; i < listOfMembers.size() ; i++){
+            for(Date borrowDate : listOfMembers.get(i).DateOfBorrowing){
                 if(ReturnedLate(borrowDate)){
-                    listOfPenalisedMembers.add(member);
-                    listOfMembers.remove(member);
+                    listOfPenalisedMembers.add(listOfMembers.get(i));
+                    listOfMembers.remove(i);
                     break;
                 }
             }
