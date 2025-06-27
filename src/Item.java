@@ -8,6 +8,7 @@ public abstract class Item {
     public String topic;
     private boolean available;
     ArrayList<Date> DatesOfBorrows = new ArrayList<>();
+    ArrayList<Date> DatesOfReturns = new ArrayList<>();
 
     public Item(String title,int yearOfPublishing,String topic,int typeNum) {
         this.title = title;

@@ -283,6 +283,32 @@ public class Library {
             }
         }
 
+        void showMembersWithBorrowedBooksAndDate() {
+            listOfBooks.forEach(Book::getInfo);
+
+            System.out.println("Enter the ID of the item you want to meow for ");
+            int bookId = in.nextInt();
+            for (Book book : listOfBooks) {
+                if (book.getId() == bookId) {
+                    for (Member member : listOfMembers) {
+                        if (member.BorrowedItemsHistory.isEmpty()) {
+                            System.out.println(member.getName() + " hasn't borrowed "+book.title);
+                            continue;
+                        }
+                        if (!member.BorrowedItemsHistory.contains(book)) {
+                            continue;
+                        }
+                        if(book.DatesOfReturns.size()==member.BorrowedItemsHistory.size())
+                            System.out.println(member.getName() + " has borrowed " + book.title + " in " + book.DatesOfBorrows.get(member.BorrowedItemsHistory.indexOf(book)).day +"/"+ book.DatesOfBorrows.get(member.BorrowedItemsHistory.indexOf(book)).month +"/"+ book.DatesOfBorrows.get(member.BorrowedItemsHistory.indexOf(book)).year  +" to " + book.DatesOfReturns.get(member.BorrowedItemsHistory.indexOf(book)).day +"/"+ book.DatesOfReturns.get(member.BorrowedItemsHistory.indexOf(book)).month +"/"+ book.DatesOfReturns.get(member.BorrowedItemsHistory.indexOf(book)).year   );
+                        else
+                            System.out.println(member.getName() + " has borrowed " + book.title + " in " + book.DatesOfBorrows.get(member.BorrowedItemsHistory.indexOf(book)).day +"/"+ book.DatesOfBorrows.get(member.BorrowedItemsHistory.indexOf(book)).month +"/"+ book.DatesOfBorrows.get(member.BorrowedItemsHistory.indexOf(book)).year  +" till now "  );
+
+
+                    }
+                }
+            }
+        }
+
     void ShowAllItems(){
         listOfItems.forEach(Item::getInfo);
     }
