@@ -29,20 +29,30 @@ public class Main {
         items.add(book4);
         items.add(book3);
         items.add(book2);
+
 //        Collections.addAll(items, book2, book , book3, book4);
 //        Collections.addAll(members,m , m1,pMember);
 
         Library l =new Library(items,members);
-
+        l.RegisterItem(book);
+        l.RegisterItem(book2);
+        l.RegisterItem(book3);
+        l.RegisterItem(book4);
 
         l.PenaliseMembers();
 //        Item proj = new Project("haz ", 3 ,true , 2020 ,  );
 
+//      l.ItemLend();
         l.ItemLend();
-        l.ItemReturned();
-        in.close();
+//
+//  l.ItemReturned();
+//        in.close();
+//        Date dat1 = new Date(25,6,2025);
+//        Date dat2 = new Date(1,7,2025);
+//        Date now = new Date(27,6,2025);
+//        System.out.println(now.isBetween(dat1,dat2));
       //  l.ItemLend();
-   //     l.SearchForCertainMembers(3);
+      l.SearchForCertainMembers(5);
 //        l.RegisterItem(book3);
 //        l.RegisterItem(book4);
 

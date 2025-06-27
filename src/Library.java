@@ -225,17 +225,64 @@ public class Library {
             case 3: {
                 listOfMembers.forEach(member -> {
                     member.BorrowedItems.forEach(item -> {
-                        if( item.topic.equalsIgnoreCase("ai") || item.topic.equalsIgnoreCase("artificial intelligence"))
+                        if (item.topic.equalsIgnoreCase("ai") || item.topic.equalsIgnoreCase("artificial intelligence"))
                             System.out.println(member.getName() + " Has an Ai Book");
 
                     });
                 });
+                break;
+            }
+
+        //Show All Penalised Members
+            case 4: {
+                System.out.println("The penalised members are : ");
+                for(Member member : listOfMembers){
+
+                    if(listOfPenalisedMembers.contains(member))
+                        System.out.println(member.getName());
+                }
+
 
             }
-            break;
+            case 5 :{
+                System.out.println("Please Enter The Start Date :");
+               int x=  in.nextInt();
+               int x2=  in.nextInt();
+               int x3=  in.nextInt();
+
+                System.out.println("Please Enter End Date :");
+                int y=  in.nextInt();
+                int y2=  in.nextInt();
+                int y3=  in.nextInt();
+
+               Date date1 = new Date(x,x2,x3);
+               Date date2 = new Date(y,y2,y3);
+               listOfBooks.forEach(Book::getInfo);
+
+                System.out.println("Enter the ID of the item you want to meow for ");
+                int bookId = in.nextInt();
+                for(Book book : listOfBooks){
+                if(book.getId() == bookId){
+                    for (Member member :listOfMembers ){
+                        if(member.BorrowedItemsHistory.isEmpty()){
+                            System.out.println(member.getName() + " hasn't borrowed any item");
+                            continue;
+                        }
+                        for (Date date : book.DatesOfBorrows) {//System.out.println(date.day + " "+ date.month +" "+ date.year + "\n"+ date.isBetween(date1,date2));
+                            if (date.isBetween(date1, date2)) {
+                                System.out.println(member.getName() + " has borrowed " + book.title + " in entered duration ");
+                                //System.out.println("meow");
+                            }
+                        }
+
+                    }
+                    }
+                }
+                }
+
+            }
         }
 
-    }
     void ShowAllItems(){
         listOfItems.forEach(Item::getInfo);
     }
