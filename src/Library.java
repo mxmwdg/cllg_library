@@ -23,25 +23,13 @@ public class Library {
 
         if(n==1) {
 
-//            Book book = new Book();
-//            if (listOfBooks.contains(book)) {
-//                System.out.println("! We already have the " + book.title + " in our library ");
-//            } else {
-//                listOfBooks.add(book);
-//                System.out.println(book.title + " is registered successfully !");
             RegisterBook((Book)item);
 
             }
 
         else if(n==2){
+
               RegisterProject((Project)item);
-//            Project project = new Project();
-//            if (listOfProjects.contains(project)) {
-//                System.out.println("! We already have the " + project.title + " in our library ");
-//            } else {
-//                listOfProjects.add(project);
-//                System.out.println(project.title + " is registered successfully !");
-//            }
 
             }
         else
