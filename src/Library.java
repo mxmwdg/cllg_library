@@ -142,7 +142,7 @@ public class Library {
                     System.out.println("Here you go!");
                     //boolean f = false;
                     for (Item item : listOfItems) {
-                        if (item.getId() == enteredId) {
+                        if (item.getId() == enteredId && item.IsAvailable()) {
                             //f = true;
                             //if (item.IsAvailable()) {
                                 item.borrow();
@@ -155,9 +155,7 @@ public class Library {
                             break;*/
                         }
                     }
-                    /*if (!f) {
-                        System.out.println("!! Wrong Id input");
-                        }*/
+
                 }
                 else {
                     System.out.println("!! Sorry , You can't borrow more than three items." + "\n" +
@@ -291,17 +289,14 @@ public class Library {
             for (Book book : listOfBooks) {
                 if (book.getId() == bookId) {
                     for (Member member : listOfMembers) {
-                        if (member.BorrowedItemsHistory.isEmpty()) {
+                        if (member.BorrowedItemsHistory.isEmpty() || !member.BorrowedItemsHistory.contains(book)) {
                             System.out.println(member.getName() + " hasn't borrowed "+book.title);
                             continue;
                         }
-                        if (!member.BorrowedItemsHistory.contains(book)) {
-                            continue;
-                        }
                         if(book.DatesOfReturns.size()==member.BorrowedItemsHistory.size())
-                            System.out.println(member.getName() + " has borrowed " + book.title + " in " + book.DatesOfBorrows.get(member.BorrowedItemsHistory.indexOf(book)).day +"/"+ book.DatesOfBorrows.get(member.BorrowedItemsHistory.indexOf(book)).month +"/"+ book.DatesOfBorrows.get(member.BorrowedItemsHistory.indexOf(book)).year  +" to " + book.DatesOfReturns.get(member.BorrowedItemsHistory.indexOf(book)).day +"/"+ book.DatesOfReturns.get(member.BorrowedItemsHistory.indexOf(book)).month +"/"+ book.DatesOfReturns.get(member.BorrowedItemsHistory.indexOf(book)).year   );
+                            System.out.println(member.getName() + " has borrowed " + book.title + " in " + book.DatesOfBorrows.get(member.BorrowedItemsHistory.indexOf(book)).print() +" to " + book.DatesOfReturns.get(member.BorrowedItemsHistory.indexOf(book)).print()   );
                         else
-                            System.out.println(member.getName() + " has borrowed " + book.title + " in " + book.DatesOfBorrows.get(member.BorrowedItemsHistory.indexOf(book)).day +"/"+ book.DatesOfBorrows.get(member.BorrowedItemsHistory.indexOf(book)).month +"/"+ book.DatesOfBorrows.get(member.BorrowedItemsHistory.indexOf(book)).year  +" till now "  );
+                            System.out.println(member.getName() + " has borrowed " + book.title + " in " + book.DatesOfBorrows.get(member.BorrowedItemsHistory.indexOf(book)).print() +" till now "  );
 
 
                     }

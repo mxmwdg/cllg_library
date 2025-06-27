@@ -45,4 +45,7 @@ public class Date {
         int Date2 = date2.ConvertDateToDays();
         return Entered >= Date1 && Entered <=Date2 ;
     }
+    String print(){
+        return this.day + "/"+ this.month + "/" + this.year ;
+    }
 }
