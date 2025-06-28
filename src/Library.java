@@ -49,6 +49,21 @@ public class Library {
         if (listOfBooks.contains(item)) {
             System.out.println("! We already have the " + item.title + " in our library ");
         } else {
+            System.out.println("Enter Id :");
+            int Id=in.nextInt();
+            System.out.println("Enter title :");
+            String t=in.nextLine();
+            System.out.println("Enter year of publishing :");
+            int y=in.nextInt();
+            System.out.println("Enter topic :");
+            String to=in.nextLine();
+            System.out.println("Enter author name :");
+            String a=in.nextLine();
+            System.out.println("Enter number of pages :");
+            int n=in.nextInt();
+            System.out.println("Enter publisher :");
+            String p=in.nextLine();
+
             listOfBooks.add(item);
             listOfItems.add(item);
             System.out.println(item.title + " is registered successfully !");
@@ -59,6 +74,17 @@ public class Library {
         if (listOfProjects.contains(item)) {
             System.out.println("! We already have the " + item.title + " in our library ");
         } else {
+            System.out.println("Enter Id :");
+            int Id=in.nextInt();
+            System.out.println("Enter title :");
+            String t=in.nextLine();
+            System.out.println("Enter year of publishing :");
+            int y=in.nextInt();
+            System.out.println("Enter topic :");
+            String to=in.nextLine();
+            System.out.println("Enter project year :");
+            int p=in.nextInt();
+
             listOfProjects.add(item);
             listOfItems.add(item);
             System.out.println(item.title + " is registered successfully !");
