@@ -11,6 +11,12 @@ public class Date {
         this.year = year;
         this.convertedDate = ConvertDateToDays();
     }
+    Date(int day, int month, int year, int changeInDays){
+        this.day = day;
+        this.month = month;
+        this.year = year;
+        this.convertedDate = ConvertDateToDays() - changeInDays;
+    }
 
     int ConvertDateToDays(){
         int temp = (this.year * 365) + ((this.month ) * 30) + this.day;

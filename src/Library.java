@@ -12,9 +12,17 @@ public class Library {
     Scanner in = new Scanner(System.in);
     private int mId ;
 
-    public Library(ArrayList<Item> listOfItems, ArrayList<Member> list0fMembers) {
+    public Library(ArrayList<Item> listOfItems, ArrayList<Member> list0fMembers , ArrayList<Book> listOfBooks) {
         this.listOfItems = listOfItems;
         this.listOfMembers = list0fMembers;
+        for(Item item : listOfItems){
+            if(item instanceof Book){
+                listOfBooks.add((Book) item);
+            }
+            else if(item instanceof Project){
+                listOfProjects.add((Project) item);
+            }
+        }
     }
 
     void RegisterItem(Item item) {

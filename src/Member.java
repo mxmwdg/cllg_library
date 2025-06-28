@@ -30,7 +30,9 @@ public class Member {
         }
         this.name = name;
     }
-    Member(Date date,Item item, String name , int registrationNumber){
+    Member(Item item, String name , int registrationNumber, int numOfDaysSinceBorrowing){
+        LocalDate currantDate = LocalDate.now();
+        Date date = new Date(currantDate.getDayOfMonth(),currantDate.getMonthValue(),currantDate.getYear(),numOfDaysSinceBorrowing);
         this.name = name;
         this.registrationNumber = registrationNumber;
         BorrowedItems.add(item);
