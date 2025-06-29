@@ -1,13 +1,12 @@
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Scanner;
 import java.time.LocalDate;
 
 public class Library {
-    ArrayList<Item> listOfItems = new ArrayList<>();
+    ArrayList<Item> listOfItems;
     ArrayList<Project> listOfProjects = new ArrayList<>();
     ArrayList<Book> listOfBooks = new ArrayList<>();
-    ArrayList<Member> listOfMembers = new ArrayList<>();
+    ArrayList<Member> listOfMembers;
     ArrayList<Member> listOfPenalisedMembers = new ArrayList<>();
     Scanner in = new Scanner(System.in);
     private int mId ;
@@ -25,19 +24,19 @@ public class Library {
         }
     }
 
-    void RegisterItem(Item item) {
+    void RegisterItem() {
         System.out.println("What type of item do you want to register ? \n 1.for Book \n 2.for Project");
         int n =in.nextInt();
 
         if(n==1) {
 
-            RegisterBook((Book)item);
+            RegisterBook();
 
             }
 
         else if(n==2){
 
-              RegisterProject((Project)item);
+              RegisterProject();
 
             }
         else
@@ -45,12 +44,8 @@ public class Library {
         }
 
 
-     void RegisterBook(Book item) {
-        if (listOfBooks.contains(item)) {
-            System.out.println("! We already have the " + item.title + " in our library ");
-        } else {
-            System.out.println("Enter Id :");
-            int Id=in.nextInt();
+     void RegisterBook() {
+
             System.out.println("Enter title :");
             String t=in.nextLine();
             System.out.println("Enter year of publishing :");
@@ -63,32 +58,38 @@ public class Library {
             int n=in.nextInt();
             System.out.println("Enter publisher :");
             String p=in.nextLine();
+            Book book = new Book(t,y,to,a,n,p) ;
 
-            listOfBooks.add(item);
-            listOfItems.add(item);
-            System.out.println(item.title + " is registered successfully !");
-        }
+
+            listOfBooks.add(book);
+            listOfItems.add(book);
+            System.out.println(book.title + " is registered successfully !");
+
      }
 
-    void RegisterProject(Project item) {
-        if (listOfProjects.contains(item)) {
-            System.out.println("! We already have the " + item.title + " in our library ");
-        } else {
-            System.out.println("Enter Id :");
-            int Id=in.nextInt();
-            System.out.println("Enter title :");
-            String t=in.nextLine();
-            System.out.println("Enter year of publishing :");
-            int y=in.nextInt();
-            System.out.println("Enter topic :");
-            String to=in.nextLine();
-            System.out.println("Enter project year :");
-            int p=in.nextInt();
-
-            listOfProjects.add(item);
-            listOfItems.add(item);
-            System.out.println(item.title + " is registered successfully !");
+    void RegisterProject() {
+        String[] team = {};
+        System.out.println("Enter title :");
+        String t=in.nextLine();
+        System.out.println("Enter year of publishing :");
+        int y=in.nextInt();
+        System.out.println("Enter topic :");
+        String to=in.nextLine();
+        System.out.println("Enter project year :");
+        int p=in.nextInt();
+        System.out.println("please enter how many people worked on this project");
+        int num = in.nextInt();
+        System.out.println("please enter each students name");
+        for(int i = 0; i < num  ; i++ ){
+            System.out.print("enter: ");
+            String name = in.next();
+            team[i] = name;
         }
+            Project project = new Project(t,y,to,p,team);
+            listOfProjects.add(project);
+            listOfItems.add(project);
+            System.out.println(project.title + " is registered successfully !");
+
     }
 
     int RegisterMember(){
@@ -106,7 +107,7 @@ public class Library {
     }
 
     int SignIn() {
-        int i= 0 ;
+
         System.out.println("enter your name: ");
         String name = in.next();
         System.out.println("enter your id: ");
@@ -169,7 +170,7 @@ public class Library {
                             //if (item.IsAvailable()) {
                                 item.borrow();
                                 member.BorrowItem(item);
-                                System.out.println(item.title + " " + "is Borrowed in " + now.toString() + " by " + member.name + " !");
+                                System.out.println(item.title + " " + "is Borrowed in " + now + " by " + member.name + " !");
                                 System.out.println("!Note : The borrowing time allowed is only 7 days ");
                             /*    }
                             else
@@ -194,26 +195,22 @@ public class Library {
         if(mId == 0)
             mId = SignIn();
 
-        ReturningBlock:
-        {
-            for (Member member : listOfMembers) {
-                if(mId == member.getRegistrationNumber()){
-                    for(Item item : member.BorrowedItems){
-                        item.getInfo();
-                    }
-                    System.out.println("Enter the id of the item you want to return: ");
-                    int enteredId = in.nextInt();
-                    for(Item item : member.BorrowedItems){
-                        if(item.getId() == enteredId){
-                            member.ReturnItem(item);
-                            item.Return();
-                            System.out.println(item.title + " is returned successfully in " + now.toString() + " by " + member.name + " !");
-                        break;
-                        }
 
-                    }
-                break;
+        for (Member member : listOfMembers) {
+            if(mId == member.getRegistrationNumber()){
+                for(Item item : member.BorrowedItems){
+                    item.getInfo();
                 }
+                System.out.println("Enter the id of the item you want to return: ");
+                int enteredId = in.nextInt();
+                for(Item item : member.BorrowedItems){
+                    if(item.getId() == enteredId){
+                        member.ReturnItem(item);
+                        item.Return();
+                        System.out.println(item.title + " is returned successfully in " + now + " by " + member.name + " !");
+                        break;
+                    }
+                }break;
             }
         }
     }
