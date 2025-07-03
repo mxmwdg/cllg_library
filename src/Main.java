@@ -49,7 +49,7 @@ public class Main {
         }while(true);*/
 
         l.PenaliseMembers();
-
+        l.listOfBooks.add(book);
         l.ItemLend();
         System.out.println("hello"); LocalDate date = LocalDate.now();
 

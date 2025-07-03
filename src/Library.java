@@ -47,7 +47,7 @@ public class Library {
      void RegisterBook() {
 
             System.out.println("Enter title :");
-            String t=in.nextLine();
+            String t = in.nextLine();
             System.out.println("Enter year of publishing :");
             int y=in.nextInt();
             System.out.println("Enter topic :");
@@ -305,21 +305,26 @@ public class Library {
 
             System.out.println("Enter the ID of the item you want to meow for ");
             int bookId = in.nextInt();
-            for (Book book : listOfBooks) {
-                if (book.getId() == bookId) {
+            for (Item item : listOfItems) {
+                if(item instanceof Book){
+                if (item.getId() == bookId) {
+                    System.out.println("Found");
                     for (Member member : listOfMembers) {
-                        if (member.BorrowedItemsHistory.isEmpty() || !member.BorrowedItemsHistory.contains(book)) {
-                            System.out.println(member.getName() + " hasn't borrowed "+book.title);
+                        if (member.BorrowedItemsHistory.isEmpty() || !member.BorrowedItemsHistory.contains(item)) {
+                            System.out.println(member.getName() + " hasn't borrowed "+item.title);
                             continue;
                         }
-                        if(book.DatesOfReturns.size()==member.BorrowedItemsHistory.size())
-                            System.out.println(member.getName() + " has borrowed " + book.title + " in " + book.DatesOfBorrows.get(member.BorrowedItemsHistory.indexOf(book)).print() +" to " + book.DatesOfReturns.get(member.BorrowedItemsHistory.indexOf(book)).print()   );
+                        if(item.DatesOfReturns.size()==member.BorrowedItemsHistory.size()) {
+
+                            System.out.println(member.getName() + " has borrowed " + item.title + " in " + item.DatesOfBorrows.get(member.BorrowedItemsHistory.indexOf(item)).print() + " to " + item.DatesOfReturns.get(member.BorrowedItemsHistory.indexOf(item)).print());
+                        }
                         else
-                            System.out.println(member.getName() + " has borrowed " + book.title + " in " + book.DatesOfBorrows.get(member.BorrowedItemsHistory.indexOf(book)).print() +" till now "  );
+                            System.out.println(member.getName() + " has borrowed " + item.title + " in " + item.DatesOfBorrows.get(member.BorrowedItemsHistory.indexOf(item)).print() +" till now "  );
 
 
                     }
                 }
+            }
             }
         }
 
