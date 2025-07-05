@@ -11,7 +11,7 @@ public class Library {
     Scanner in = new Scanner(System.in);
     private int mId ;
 
-    public Library(ArrayList<Item> listOfItems, ArrayList<Member> list0fMembers , ArrayList<Book> listOfBooks) {
+    public Library(ArrayList<Item> listOfItems, ArrayList<Member> list0fMembers ) {
         this.listOfItems = listOfItems;
         this.listOfMembers = list0fMembers;
         for(Item item : listOfItems){
@@ -22,9 +22,25 @@ public class Library {
                 listOfProjects.add((Project) item);
             }
         }
+        PenaliseMembers();
     }
 
     void RegisterItem() {
+        if(mId == 0){
+            System.out.println("you have to sign up or log in first:");
+            System.out.println("1.sign up (you don't have an account)   2.log in (you already have an account");
+            int v = in.nextInt();
+            if(v == 2){
+                mId = SignIn();
+                if(mId == 0) return;
+            }
+            else if (v == 1) {
+                mId = RegisterMember();
+            }
+            else
+                System.out.println("! wrong input");
+            return;
+        }
         System.out.println("What type of item do you want to register ? \n 1.for Book \n 2.for Project");
         int n =in.nextInt();
 
@@ -42,9 +58,7 @@ public class Library {
         else
             System.out.println("Wrong Number ");
         }
-
-
-     void RegisterBook() {
+    void RegisterBook() {
 
             System.out.println("Enter title :");
             String t = in.nextLine();
@@ -68,17 +82,18 @@ public class Library {
      }
 
     void RegisterProject() {
-        String[] team = {};
+        String[] team = new String[6];
         System.out.println("Enter title :");
         String t=in.nextLine();
-        System.out.println("Enter year of publishing :");
+        System.out.println("Enter year of6 publishing :");
         int y=in.nextInt();
         System.out.println("Enter topic :");
         String to=in.nextLine();
         System.out.println("Enter project year :");
         int p=in.nextInt();
-        System.out.println("please enter how many people worked on this project");
+        System.out.println("please enter how many people worked on this project (6 people is the limit)");
         int num = in.nextInt();
+        if(num < 6 && num > 0){
         System.out.println("please enter each students name");
         for(int i = 0; i < num  ; i++ ){
             System.out.print("enter: ");
@@ -88,8 +103,7 @@ public class Library {
             Project project = new Project(t,y,to,p,team);
             listOfProjects.add(project);
             listOfItems.add(project);
-            System.out.println(project.title + " is registered successfully !");
-
+            System.out.println(project.title + " is registered successfully !");}
     }
 
     int RegisterMember(){
@@ -107,7 +121,7 @@ public class Library {
     }
 
     int SignIn() {
-
+        PenaliseMembers();
         System.out.println("enter your name: ");
         String name = in.next();
         System.out.println("enter your id: ");
@@ -136,7 +150,6 @@ public class Library {
         return 0 ;
     }
 
-
     //we will force the member to signIn/register when they want to borrow so this method should be changed
     void ItemLend() {
         if(mId == 0){
@@ -152,6 +165,7 @@ public class Library {
         }
         else
             System.out.println("! wrong input");
+        return;
         }
         LocalDate now = LocalDate.now();
 
@@ -166,16 +180,12 @@ public class Library {
                     //boolean f = false;
                     for (Item item : listOfItems) {
                         if (item.getId() == enteredId && item.IsAvailable()) {
-                            //f = true;
-                            //if (item.IsAvailable()) {
+
                                 item.borrow();
                                 member.BorrowItem(item);
                                 System.out.println(item.title + " " + "is Borrowed in " + now + " by " + member.name + " !");
                                 System.out.println("!Note : The borrowing time allowed is only 7 days ");
-                            /*    }
-                            else
-                                System.out.println("!! Sorry This Book Is Unavailable" + "\n" + " Please Choose Another Book");
-                            break;*/
+
                         }
                     }
 
@@ -187,10 +197,8 @@ public class Library {
                 }
         }
     }
-
-
     //check if the member has the book in the first place, or he could return a book he doesn't have.
-    void ItemReturned( ) {
+    void ItemReturn( ) {
         LocalDate now = LocalDate.now();
         if(mId == 0)
             mId = SignIn();
@@ -214,8 +222,6 @@ public class Library {
             }
         }
     }
-
-
     //7 day check and penalise if returned too late
     boolean ReturnedLate(Date borrowDate) {
         LocalDate currantDate = LocalDate.now();
@@ -227,7 +233,8 @@ public class Library {
         return member.getNumberOfBorrowedItems() < 3 && member.isSignedIn()&& !listOfPenalisedMembers.contains((member));
     }
 
-    void SearchForCertainMembers(int optionNumber) {
+    void SearchForCertainMembers() {
+        int optionNumber = showMemberOptions();
         switch (optionNumber) {
             //every member and their borrowed items.
             case 2: {
@@ -299,8 +306,7 @@ public class Library {
 
             }
         }
-
-        void showMembersWithBorrowedBooksAndDate() {
+    void showMembersWithBorrowedBooksAndDate() {
             listOfBooks.forEach(Book::getInfo);
 
             System.out.println("Enter the ID of the item you want to meow for ");
@@ -336,7 +342,8 @@ public class Library {
     }
 
 
-    void SearchForAnItem(int optionNumber) {
+    void SearchForAnItem() {
+        int optionNumber = showItemOptions();
         switch (optionNumber) {
             //every book
             case 1: {
@@ -418,6 +425,7 @@ public class Library {
            // Show every item
             case 7 :{
                 this.ShowAllItems();
+                break;
             }
             default:
                 System.out.println("wrong input");
@@ -455,12 +463,22 @@ public class Library {
                 }
                 case 4: {
                     for (Project project : listOfProjects) {
+                        if (project.id >= 2700 && project.id < 2900 && project.IsAvailable()) {
+                            project.getInfo();
+                        }
+                    }
+                    break;
+                }
+                case 5: {
+                    for (Project project : listOfProjects) {
                         if (project.id >= 2900 && project.IsAvailable()) {
                             project.getInfo();
                         }
                     }
                     break;
                 }
+                default:
+                    System.out.println("wrong input");
             }
 
         }
@@ -488,17 +506,24 @@ public class Library {
                         }
                     } break;
                 }
-                case 4: {
-                    for (Item item : listOfItems) {
-                        if (item.id >= 1900 && item.id < 2000 || item.id >= 2900)  {
-                            item.getInfo();
-                        }
-                    }break;
-                }
+            case 4: {
+                for (Item item : listOfItems) {
+                    if (item.id >= 1700 && item.id < 1900 || item.id >= 2700 && item.id < 2900 )  {
+                        item.getInfo();
+                    }
+                } break;
+            }
+             case 5: {
+                 for (Item item : listOfItems) {
+                     if (item.id >= 1900 && item.id < 2000 || item.id >= 2900)  {
+                         item.getInfo();
+                     }
+                 }break;
+             }
             }
         }
     }
-    void PenaliseMembers(){
+    private void PenaliseMembers(){
         for(int i = 0 ; i < listOfMembers.size() ; i++){
             for(Date borrowDate : listOfMembers.get(i).DateOfBorrowing){
                 if(ReturnedLate(borrowDate)){
@@ -509,6 +534,23 @@ public class Library {
             }
         }
     }
+    private int showItemOptions(){
+        System.out.println("1.every book");
+        System.out.println("2.every project selected by year");
+        System.out.println("3.every item selected by topics");
+        System.out.println("4.every available project by topic");
+        System.out.println("5.every unavailable book / every lent book");
+        System.out.println("6.search for a certain book or project by id or title or topic");
+        System.out.println("7.Show every item");
+        int choice = in.nextInt();
+        if (choice > 0 && choice < 8)
+            return choice;
+        else return 0;
+    }
+    private int showMemberOptions() {
+        return 0;
+    }
 }
+
 
 
