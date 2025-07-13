@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public abstract class Item {
     private static int count = 0;
     public String title;
@@ -7,8 +5,8 @@ public abstract class Item {
     public int yearOfPublishing;
     public String topic;
     private boolean available;
-    ArrayList<Date> DatesOfBorrows = new ArrayList<>();
-    ArrayList<Date> DatesOfReturns = new ArrayList<>();
+
+
 
     public Item(String title,int yearOfPublishing,String topic,int typeNum) {
         this.title = title;
@@ -48,19 +46,17 @@ public abstract class Item {
         this.available = true;
     }
 
-    abstract String getInfo();
+    abstract void getInfo();
 
 
     @Override
     public String toString() {
-        return "Item{" +
-                ", title='" + title + '\'' +
-                ", yearOfPublishing=" + yearOfPublishing +
-                ", topic='" + topic + '\'' +
+        return " *title = " + title +
+                "\n *yearOfPublishing = " + yearOfPublishing +
+                "\n *topic =" + topic +
+                "\n *available = " + available +
+                "\n *id = " + id + "\n";
 
-                ", available=" + available +
-                ", Id =" +this.getId()+
-                '}';
     }
 }
 
