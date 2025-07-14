@@ -1,10 +1,10 @@
 public abstract class Item {
     private static int count = 0;
-    public String title;
-    int id;
-    public int yearOfPublishing;
-    public String topic;
-    private boolean available;
+    protected String title;
+    protected int id;
+    protected int yearOfPublishing;
+    protected String topic;
+    protected boolean available;
 
 
 
@@ -26,7 +26,7 @@ public abstract class Item {
             this.id = id + 900 + count + typeNum;
     }
 
-    public Item(String title) {
+    public void setTitle(String title) {
         this.title=title;
     }
 
@@ -58,5 +58,7 @@ public abstract class Item {
                 "\n *id = " + id + "\n";
 
     }
+
+
 }
 

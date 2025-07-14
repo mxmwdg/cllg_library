@@ -3,11 +3,11 @@ import java.util.Scanner;
 import java.time.LocalDate;
 
 public class Library {
-    ArrayList<Item> listOfItems;
-    ArrayList<Project> listOfProjects = new ArrayList<>();
-    ArrayList<Book> listOfBooks = new ArrayList<>();
-    ArrayList<Member> listOfMembers;
-    ArrayList<Member> listOfPenalisedMembers = new ArrayList<>();
+    protected ArrayList<Item> listOfItems;
+    protected ArrayList<Project> listOfProjects = new ArrayList<>();
+    protected ArrayList<Book> listOfBooks = new ArrayList<>();
+    protected ArrayList<Member> listOfMembers;
+    protected ArrayList<Member> listOfPenalisedMembers = new ArrayList<>();
     Scanner in = new Scanner(System.in);
     private int mId ;
 
@@ -35,7 +35,7 @@ public class Library {
                 if(mId == 0) return;
             }
             else if (v == 1) {
-                mId = RegisterMember();
+                RegisterMember();
             }
             else
                 System.out.println("! wrong input");
@@ -58,20 +58,21 @@ public class Library {
         else
             System.out.println("Wrong Number ");
         }
+
     void RegisterBook() {
 
             System.out.println("Enter title :");
-            String t = in.nextLine();
+            String t = in.next();
             System.out.println("Enter year of publishing :");
             int y=in.nextInt();
             System.out.println("Enter topic :");
-            String to=in.nextLine();
+            String to=in.next();
             System.out.println("Enter author name :");
-            String a=in.nextLine();
+            String a=in.next();
             System.out.println("Enter number of pages :");
             int n=in.nextInt();
             System.out.println("Enter publisher :");
-            String p=in.nextLine();
+            String p=in.next();
             Book book = new Book(t,y,to,a,n,p) ;
 
 
@@ -84,12 +85,12 @@ public class Library {
     void RegisterProject() {
         String[] team = new String[6];
         System.out.println("Enter title :");
-        String t=in.nextLine();
-        System.out.println("Enter year of6 publishing :");
+        String t=in.next();
+        System.out.println("Enter year of publishing :");
         int y=in.nextInt();
         System.out.println("Enter topic :");
-        String to=in.nextLine();
-        System.out.println("Enter project year :");
+        String to=in.next();
+        System.out.println("Enter project year (1-5) :");
         int p=in.nextInt();
         System.out.println("please enter how many people worked on this project (6 people is the limit)");
         int num = in.nextInt();
@@ -114,7 +115,7 @@ public class Library {
         System.out.println(project.title + " is registered successfully !");
     }
 
-    int RegisterMember(){
+    void RegisterMember(){
         in.reset();
         System.out.println("**************Registration**************");
         System.out.println("To register please enter your name: ");
@@ -122,11 +123,11 @@ public class Library {
 
         Member member = new Member(name);
         listOfMembers.add(member);
-        System.out.println(member.name + " is registered successfully !");
-        System.out.println("Your registration number is: " + member.registrationNumber);
+        System.out.println(member.getName() + " is registered successfully !");
+        System.out.println("Your registration number is: " + member.getRegistrationNumber());
         System.out.println("You can now borrow three items at a time");
         member.setSignedIn();
-        return member.getRegistrationNumber();
+        setMid(member.getRegistrationNumber());
     }
 
     void SignIn() {
@@ -146,7 +147,7 @@ public class Library {
         }
         for (Member member : listOfMembers) {
             if (member.equals(currantUser)) {
-                System.out.println("Hello Mr." + currantUser.name.toUpperCase());
+                System.out.println("Hello Mr." + currantUser.getName().toUpperCase());
                 member.setSignedIn();
                 currantUser.setSignedIn();
                 setMid(mId);
@@ -166,11 +167,13 @@ public class Library {
         System.out.println("1.sign up (you don't have an account)   2.log in (you already have an account");
         int v = in.nextInt();
         if(v == 2){
+            RegisterMember();
              mId = getMid();
              if(mId == 0) return;
         }
         else if (v == 1) {
-             mId = RegisterMember();
+             SignIn();
+             mId = getMid();
         }
         else
             System.out.println("! wrong input");
@@ -191,7 +194,7 @@ public class Library {
                     if (item.getId() == enteredId && item.IsAvailable()) {
                         item.borrow();
                         member.BorrowItem(item);
-                        System.out.println(item.title + " " + "is Borrowed in " + now + " by " + member.name + " !");
+                        System.out.println(item.title + " " + "is Borrowed in " + now + " by " + member.getName() + " !");
                         System.out.println("!Note : The borrowing time allowed is only 7 days ");
                     }
                     else
@@ -205,6 +208,7 @@ public class Library {
                 }
         }
     }
+
     //check if the member has the book in the first place, or he could return a book he doesn't have.
     void ItemReturn( ) {
         LocalDate now = LocalDate.now();
@@ -223,7 +227,7 @@ public class Library {
                     if(item.getId() == enteredId){
                         member.ReturnItem(item);
                         item.Return();
-                        System.out.println(item.title + " is returned successfully in " + now + " by " + member.name + " !");
+                        System.out.println(item.title + " is returned successfully in " + now + " by " + member.getName() + " !");
                         break;
 
                     }
@@ -234,6 +238,104 @@ public class Library {
         }
     }
 
+    void SearchForAnItem() {
+        int optionNumber = showItemOptions();
+        switch (optionNumber) {
+            //every book
+            case 1: {
+                for (Book book : listOfBooks) {
+                    book.getInfo();
+                }
+                break;
+            }
+            //every project selected by year
+            case 2: {
+                System.out.println("Select the year of the projects you want to view: ");
+                int year = in.nextInt();
+                for (Project project : listOfProjects) {
+                    if (project.projectYear == year) {
+                        project.getInfo();
+                    }
+                }
+                break;
+            }
+            //every item selected by topics
+            case 3: {
+                System.out.println("Select the the topic of the items you want to view : ");
+                System.out.println("1.basic science  2.AI  3.software development  4.networks");
+                int c = in.nextInt();
+                SearchForItemsByTopics(c);
+                break;
+            }
+            //every available project by topic
+            case 4: {
+                System.out.println("Select the the topic of the available projects you want to view : ");
+                System.out.println("1.basic science  2.AI  3.software development  4.networks");
+                int c = in.nextInt();
+                SearchForProjectsByTopic(c);
+                break;
+            }
+            //every unavailable book / every lent book
+            case 5:{
+                for(Book book :listOfBooks){
+                    if(!book.IsAvailable()){
+                        book.getInfo();
+                    }
+                }
+                break;
+            }
+            //search for a certain book or project by id or title or topic
+            case 6:{
+                System.out.println("select preferred method of search:");
+                System.out.println("1.id  2.title 3.topic");
+                int c = in.nextInt();
+                switch (c){
+                    case 1: {
+                        System.out.println("enter the id:");
+                        int n = in.nextInt();
+                        listOfItems.forEach(m -> {
+                            if(m.id == n )
+                                m.getInfo();
+                        });
+                        break;
+                    }
+                    case 2: {
+                        System.out.println("Enter the title:");
+                        in.nextLine();
+
+                        String s = in.nextLine();
+                        for(Item item : listOfItems) {
+                            if(s.equalsIgnoreCase(item.title)) {
+                                item.getInfo();
+                            }
+                        }
+                        in.reset();
+                        break;
+                    }
+                    case 3: {
+                        System.out.println("Select the the topic of the items you want to view : ");
+                        System.out.println("1.basic science  2.AI  3.software development  4.networks");
+                        int choice = in.nextInt();
+                        SearchForItemsByTopics(choice);
+                        break;
+                    }
+                    default:
+                        System.out.println("wrong input");
+                        break;
+                }
+                break;
+            }
+            // Show every item
+            case 7 :{
+                this.ShowAllItems();
+                break;
+            }
+            default:
+                System.out.println("wrong input");
+                break;
+
+        }
+    }
 
     void SearchForCertainMembers() {
         int optionNumber = showMemberOptions();
@@ -241,7 +343,7 @@ public class Library {
             //every member and their borrowed items.
             case 1: {
                 for (Member member : listOfMembers) {
-                    System.out.println("Member: " + member.name + " has borrowed the following titles: ");
+                    System.out.println("Member: " + member.getName() + " has borrowed the following titles: ");
                     for (Item borrowedItem : member.BorrowedItems) {
                         System.out.println(borrowedItem.title);
                         break;
@@ -314,6 +416,7 @@ public class Library {
 
         }
         }
+
     void showMembersWithBorrowedBooksAndDate() {
             listOfBooks.forEach(Book::getInfo);
 
@@ -341,114 +444,6 @@ public class Library {
             }
         }
 
-    void SearchForAnItem() {
-        int optionNumber = showItemOptions();
-        switch (optionNumber) {
-            //every book
-            case 1: {
-                for (Book book : listOfBooks) {
-                    book.getInfo();
-                }
-                break;
-            }
-            //every project selected by year
-            case 2: {
-                System.out.println("Select the year of the projects you want to view: ");
-                int year = in.nextInt();
-                for (Project project : listOfProjects) {
-                    if (project.projectYear == year) {
-                        project.getInfo();
-                    }
-                }
-                break;
-            }
-            //every item selected by topics
-            case 3: {
-                System.out.println("Select the the topic of the items you want to view : ");
-                System.out.println("1.basic science  2.AI  3.software development  4.networks");
-                int c = in.nextInt();
-                SearchForItemsByTopics(c);
-                break;
-            }
-            //every available project by topic
-            case 4: {
-                System.out.println("Select the the topic of the available projects you want to view : ");
-                System.out.println("1.basic science  2.AI  3.software development  4.networks");
-                int c = in.nextInt();
-                SearchForProjectsByTopic(c);
-                break;
-            }
-            //every unavailable book / every lent book
-            case 5:{
-                for(Book book :listOfBooks){
-                    if(!book.IsAvailable()){
-                        book.getInfo();
-                    }
-                }
-                break;
-            }
-            //search for a certain book or project by id or title or topic
-            case 6:{
-                System.out.println("select preferred method of search:");
-                System.out.println("1.id  2.title 3.topic");
-                int c = in.nextInt();
-                switch (c){
-                    case 1: {
-                        System.out.println("enter the id:");
-                        int n = in.nextInt();
-                        listOfItems.forEach(m -> {
-                            if(m.id == n )
-                                m.getInfo();
-                        });
-                        break;
-                    }
-                    case 2: {
-                        System.out.println("Enter the title:");
-                        String s = in.next();
-                        s.toLowerCase();
-                        s.replace(" ","a");
-                        s.strip();
-                      for(Item item : listOfItems) {
-                          item.title.strip();
-                          item.title.replace(" ","a");
-                          if(s.equalsIgnoreCase(item.title)) {
-                              item.getInfo();
-                          }
-                      }
-                      in.reset();
-                        break;
-                    }
-                    case 3: {
-                        System.out.println("Select the the topic of the items you want to view : ");
-                        System.out.println("1.basic science  2.AI  3.software development  4.networks");
-                        int choice = in.nextInt();
-                        SearchForItemsByTopics(choice);
-                        break;
-                    }
-                    default:
-                        System.out.println("wrong input");
-                        break;
-                }
-                break;
-            }
-           // Show every item
-            case 7 :{
-                this.ShowAllItems();
-                break;
-            }
-            default:
-                System.out.println("wrong input");
-                break;
-
-        }
-    }
-
-    void setMid(int mId){
-        this.mId = mId;
-    }
-    int getMid(){
-        return mId;
-    }
     //7 day check and penalise if returned too late
     boolean ReturnedLate(Date borrowDate) {
         LocalDate currantDate = LocalDate.now();
@@ -590,6 +585,13 @@ public class Library {
             }
         }
         }
+    }
+
+    void setMid(int mId){
+        this.mId = mId;
+    }
+    int getMid(){
+        return mId;
     }
 }
 

@@ -39,11 +39,7 @@ public class Date {
     public static int TimeElapsedBetweenTwoDates(Date borrowDate, Date returnDate){
             return Math.abs(returnDate.convertedDate - borrowDate.convertedDate);
     }
-    public boolean isEquals(Date date){
-        int entered = this.ConvertDateToDays();
-        int date1 = date.ConvertDateToDays();
-        return entered == date1;
-    }
+
 
     public boolean isBetween(Date date ,Date date2) {
         int Entered = this.ConvertDateToDays();

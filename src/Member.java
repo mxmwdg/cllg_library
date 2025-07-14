@@ -2,8 +2,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Member {
-    int registrationNumber = 20250;
-    String name;
+    private int registrationNumber = 20250;
+    private final String name;
     static int count = 0;
     ArrayList<Item> BorrowedItems = new ArrayList<>();
     ArrayList<Item> BorrowedItemsHistory = new ArrayList<>();

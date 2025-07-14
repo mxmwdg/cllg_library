@@ -1,13 +1,9 @@
 public class Book extends Item {
-    String author;
-    int numOfPages;
-    String publisher;
-    int typeNum = 1000;
+    private String author;
+    private int numOfPages;
+    private String publisher;
 
-
-
-
-    Book( String title , int YearOfPublishing , String topic ,String author, int numOfPages, String publisher){
+    Book(String title , int YearOfPublishing , String topic , String author, int numOfPages, String publisher){
         super(title,YearOfPublishing,topic,1000);
         this.author = author;
         this.numOfPages = numOfPages;
@@ -37,4 +33,36 @@ public class Book extends Item {
                 "\n *publisher = " + publisher );
         System.out.print(super.toString());
     }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public int getNumOfPages() {
+        return numOfPages;
+    }
+
+    public void setNumOfPages(int numOfPages) {
+        this.numOfPages = numOfPages;
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+
+
+
+
+
+
+
+
 }
