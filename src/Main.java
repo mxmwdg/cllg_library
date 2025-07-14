@@ -7,8 +7,8 @@ public class Main {
         Scanner in = new Scanner(System.in);
         Book book4 = new Book("Mage Errant", 2005 ,"basic science","John Bierce",1049,"American Press");
         Book book2 = new Book("Benefits of Ai", 2019 ,"Ai","Elon Musk",543,"Ai For Publishing");
-        Book book3 = new Book("the angel next door ", 1990 ,"Software development","Satan",700,"Paradise");
-        Book book = new Book("AC forever", 2028 ,"Basic Science"," mustafa alexander",696,"Mdrj 4");
+        Book book3 = new Book("the angel next door", 1990 ,"Software development","Satan",700,"Paradise");
+        Book book = new Book("AcLover", 2028 ,"Basic Science"," mustafa alexander",696,"Mdrj 4");
 
         Member m = new Member("Amin");
         Member m1 = new Member("Bilal");
@@ -60,6 +60,7 @@ public class Main {
                 case "6" : {l.ItemReturn();break;}
                 case "7" : {l.SearchForCertainMembers();break;}
                 case "q" : break;
+
              }
 
         }while(!options.equals("q"));

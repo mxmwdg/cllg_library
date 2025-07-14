@@ -115,6 +115,7 @@ public class Library {
     }
 
     int RegisterMember(){
+        in.reset();
         System.out.println("**************Registration**************");
         System.out.println("To register please enter your name: ");
         String name = in.next();
@@ -184,19 +185,18 @@ public class Library {
                 ShowAllAvailableItems();
                 System.out.println("\nEnter the ID of the item you want to borrow : ");
                 int enteredId = in.nextInt();
-                    System.out.println("Here you go!");
-                    //boolean f = false;
-                    for (Item item : listOfItems) {
-                        if (item.getId() == enteredId && item.IsAvailable()) {
+                System.out.println("Here you go!");
 
-                                item.borrow();
-                                member.BorrowItem(item);
-                                System.out.println(item.title + " " + "is Borrowed in " + now + " by " + member.name + " !");
-                                System.out.println("!Note : The borrowing time allowed is only 7 days ");
-
-                        }
+                for (Item item : listOfItems) {
+                    if (item.getId() == enteredId && item.IsAvailable()) {
+                        item.borrow();
+                        member.BorrowItem(item);
+                        System.out.println(item.title + " " + "is Borrowed in " + now + " by " + member.name + " !");
+                        System.out.println("!Note : The borrowing time allowed is only 7 days ");
                     }
-
+                    else
+                        System.out.println("You entered a wrong Id "+ "\n Or the item you are trying to borrow is not available");
+                    }
                 }
                 else {
                     System.out.println("!! Sorry , You can't borrow more than three items." + "\n" +
@@ -225,21 +225,15 @@ public class Library {
                         item.Return();
                         System.out.println(item.title + " is returned successfully in " + now + " by " + member.name + " !");
                         break;
+
                     }
+                    else
+                        System.out.println("You entered wrong Id "+ "\n Or the item you are trying to return is not borrowed by this member ");
                 }break;
             }
         }
     }
-    //7 day check and penalise if returned too late
-    boolean ReturnedLate(Date borrowDate) {
-        LocalDate currantDate = LocalDate.now();
-        Date now = new Date(currantDate.getDayOfMonth(),currantDate.getDayOfMonth(),currantDate.getYear());
-        return Date.TimeElapsedBetweenTwoDates(borrowDate, now) > 7;
-    }
-    //3 items borrowed limiter
-    boolean MemberIsAbleToBorrow(Member member) {
-        return member.getNumberOfBorrowedItems() < 3 && member.isSignedIn()&& !listOfPenalisedMembers.contains((member));
-    }
+
 
     void SearchForCertainMembers() {
         int optionNumber = showMemberOptions();
@@ -255,13 +249,13 @@ public class Library {
                 }
             }
             case 2: {
-                listOfMembers.forEach(member -> {
+                for(Member member : listOfMembers){
                     member.BorrowedItems.forEach(item -> {
                         if (item.topic.equalsIgnoreCase("ai") || item.topic.equalsIgnoreCase("artificial intelligence"))
                             System.out.println(member.getName() + " Has an Ai Book");
 
                     });
-                });
+                }
                 break;
             }
 
@@ -347,14 +341,6 @@ public class Library {
             }
         }
 
-    void ShowAllItems(){
-        listOfItems.forEach(Item::getInfo);
-    }
-    void ShowAllAvailableItems(){
-        listOfItems.forEach(b ->{if(b.IsAvailable())b.getInfo();});
-    }
-
-
     void SearchForAnItem() {
         int optionNumber = showItemOptions();
         switch (optionNumber) {
@@ -420,8 +406,15 @@ public class Library {
                         System.out.println("Enter the title:");
                         String s = in.next();
                         s.toLowerCase();
-                      for(Item item : listOfItems) {if(s.equals(item.title))
-                          item.getInfo();}
+                        s.replace(" ","a");
+                        s.strip();
+                      for(Item item : listOfItems) {
+                          item.title.strip();
+                          item.title.replace(" ","a");
+                          if(s.equalsIgnoreCase(item.title)) {
+                              item.getInfo();
+                          }
+                      }
                       in.reset();
                         break;
                     }
@@ -450,95 +443,23 @@ public class Library {
         }
     }
 
-    void SearchForProjectsByTopic(int c){
-
-            switch (c) {
-                case 1: {
-                    for (Project project : listOfProjects) {
-                        if (project.id >= 2100 && project.id < 2300 && project.IsAvailable()) {
-                            project.getInfo();
-                        }
-                    }
-                    break;
-                }
-                case 2: {
-                    for (Project project : listOfProjects) {
-                        if (project.id >= 2300 && project.id < 2500 && project.IsAvailable()) {
-                            project.getInfo();
-                        }
-                    }
-                    break;
-                }
-                case 3: {
-                    for (Project project : listOfProjects) {
-                        if (project.id >= 2500 && project.id < 2700 && project.IsAvailable()) {
-                            project.getInfo();
-                        }
-                    }
-                    break;
-                }
-                case 4: {
-                    for (Project project : listOfProjects) {
-                        if (project.id >= 2700 && project.id < 2900 && project.IsAvailable()) {
-                            project.getInfo();
-                        }
-                    }
-                    break;
-                }
-                case 5: {
-                    for (Project project : listOfProjects) {
-                        if (project.id >= 2900 && project.IsAvailable()) {
-                            project.getInfo();
-                        }
-                    }
-                    break;
-                }
-                default:
-                    System.out.println("wrong input");
-            }
-
-
+    void setMid(int mId){
+        this.mId = mId;
     }
-    void SearchForItemsByTopics(int c){
-        {switch (c) {
-                case 1: {
-                    for (Item item : listOfItems) {
-                        if (item.id >= 1100 && item.id < 1300 || item.id >= 2100 && item.id < 2300 )  {
-                            item.getInfo();
-                        }
-                    }break;
-                }
-                case 2: {
-                    for (Item item : listOfItems) {
-                        if (item.id >= 1300 && item.id < 1500 || item.id >= 2300 && item.id < 2500 )  {
-                            item.getInfo();
-                        }
-                    } break;
-                }
-                case 3: {
-                    for (Item item : listOfItems) {
-                        if (item.id >= 1500 && item.id < 1700 || item.id >= 2500 && item.id < 2700 )  {
-                            item.getInfo();
-                        }
-                    } break;
-                }
-            case 4: {
-                for (Item item : listOfItems) {
-                    if (item.id >= 1700 && item.id < 1900 || item.id >= 2700 && item.id < 2900 )  {
-                        item.getInfo();
-                    }
-                } break;
-            }
-             case 5: {
-                 for (Item item : listOfItems) {
-                     if (item.id >= 1900 && item.id < 2000 || item.id >= 2900)  {
-                         item.getInfo();
-                     }
-                 }break;
-             }
-            }
-        }
+    int getMid(){
+        return mId;
     }
+    //7 day check and penalise if returned too late
+    boolean ReturnedLate(Date borrowDate) {
+        LocalDate currantDate = LocalDate.now();
+        Date now = new Date(currantDate.getDayOfMonth(),currantDate.getDayOfMonth(),currantDate.getYear());
+        return Date.TimeElapsedBetweenTwoDates(borrowDate, now) > 7;
+    }
+    //3 items borrowed limiter
+    boolean MemberIsAbleToBorrow(Member member) {
+        return member.getNumberOfBorrowedItems() < 3 && member.isSignedIn()&& !listOfPenalisedMembers.contains((member));
+    }
+    //put members who are late in the penalised list
     private void PenaliseMembers(){
         for(int i = 0 ; i < listOfMembers.size() ; i++){
             for(Date borrowDate : listOfMembers.get(i).DateOfBorrowing){
@@ -575,11 +496,100 @@ public class Library {
             return choice;
         else return 0;
     }
-    void setMid(int mId){
-        this.mId = mId;
+    void ShowAllItems(){
+        listOfItems.forEach(Item::getInfo);
     }
-    int getMid(){
-        return mId;
+    void ShowAllAvailableItems(){
+        listOfItems.forEach(b ->{if(b.IsAvailable())b.getInfo();});
+    }
+    void SearchForProjectsByTopic(int c){
+
+        switch (c) {
+            case 1: {
+                for (Project project : listOfProjects) {
+                    if (project.id >= 2100 && project.id < 2300 && project.IsAvailable()) {
+                        project.getInfo();
+                    }
+                }
+                break;
+            }
+            case 2: {
+                for (Project project : listOfProjects) {
+                    if (project.id >= 2300 && project.id < 2500 && project.IsAvailable()) {
+                        project.getInfo();
+                    }
+                }
+                break;
+            }
+            case 3: {
+                for (Project project : listOfProjects) {
+                    if (project.id >= 2500 && project.id < 2700 && project.IsAvailable()) {
+                        project.getInfo();
+                    }
+                }
+                break;
+            }
+            case 4: {
+                for (Project project : listOfProjects) {
+                    if (project.id >= 2700 && project.id < 2900 && project.IsAvailable()) {
+                        project.getInfo();
+                    }
+                }
+                break;
+            }
+            case 5: {
+                for (Project project : listOfProjects) {
+                    if (project.id >= 2900 && project.IsAvailable()) {
+                        project.getInfo();
+                    }
+                }
+                break;
+            }
+            default:
+                System.out.println("wrong input");
+        }
+
+
+    }
+    void SearchForItemsByTopics(int c){
+        {switch (c) {
+            case 1: {
+                for (Item item : listOfItems) {
+                    if (item.id >= 1100 && item.id < 1300 || item.id >= 2100 && item.id < 2300 )  {
+                        item.getInfo();
+                    }
+                }break;
+            }
+            case 2: {
+                for (Item item : listOfItems) {
+                    if (item.id >= 1300 && item.id < 1500 || item.id >= 2300 && item.id < 2500 )  {
+                        item.getInfo();
+                    }
+                } break;
+            }
+            case 3: {
+                for (Item item : listOfItems) {
+                    if (item.id >= 1500 && item.id < 1700 || item.id >= 2500 && item.id < 2700 )  {
+                        item.getInfo();
+                    }
+                } break;
+            }
+            case 4: {
+                for (Item item : listOfItems) {
+                    if (item.id >= 1700 && item.id < 1900 || item.id >= 2700 && item.id < 2900 )  {
+                        item.getInfo();
+                    }
+                } break;
+            }
+            case 5: {
+                for (Item item : listOfItems) {
+                    if (item.id >= 1900 && item.id < 2000 || item.id >= 2900)  {
+                        item.getInfo();
+                    }
+                }break;
+            }
+        }
+        }
     }
 }
 
