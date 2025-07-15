@@ -593,6 +593,8 @@ public class Library {
     int getMid(){
         return mId;
     }
+    void logout(){mId = 0;
+        System.out.println("You have been logged out.");}
 }
 
 

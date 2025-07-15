@@ -19,6 +19,7 @@ public class Main {
             System.out.println("5.borrow an item");
             System.out.println("6.return a lent item");
             System.out.println("7.search for certain members");
+            System.out.println("8.logout");
             System.out.println("q. quit");
             System.out.println("============================================");
 
@@ -31,6 +32,7 @@ public class Main {
                 case "5" : {l.ItemLend();break;}
                 case "6" : {l.ItemReturn();break;}
                 case "7" : {l.SearchForCertainMembers();break;}
+                case "8" : {l.logout();}
                 case "q" : break;
                 default:
                     System.out.println("Wrong input!");
