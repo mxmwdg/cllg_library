@@ -213,7 +213,7 @@ public class Library {
     void ItemReturn( ) {
         LocalDate now = LocalDate.now();
         if(mId == 0)
-            mId = getMid();
+            System.out.println("Please log in first <3");
 
 
         for (Member member : listOfMembers) {
