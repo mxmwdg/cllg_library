@@ -166,12 +166,12 @@ public class Library {
         System.out.println("you have to sign up or log in first:");
         System.out.println("1.sign up (you don't have an account)   2.log in (you already have an account");
         int v = in.nextInt();
-        if(v == 2){
+        if(v == 1){
             RegisterMember();
              mId = getMid();
              if(mId == 0) return;
         }
-        else if (v == 1) {
+        else if (v == 2) {
              SignIn();
              mId = getMid();
         }
@@ -196,11 +196,11 @@ public class Library {
                         member.BorrowItem(item);
                         System.out.println(item.title + " " + "is Borrowed in " + now + " by " + member.getName() + " !");
                         System.out.println("!Note : The borrowing time allowed is only 7 days ");
+                        break;
                     }
-                    else
-                        System.out.println("You entered a wrong Id "+ "\n Or the item you are trying to borrow is not available");
                     }
                 }
+
                 else {
                     System.out.println("!! Sorry , You can't borrow more than three items." + "\n" +
                                 "You have to return an item first.");
