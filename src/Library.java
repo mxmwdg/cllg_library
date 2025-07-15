@@ -593,6 +593,9 @@ public class Library {
     int getMid(){
         return mId;
     }
+    void logout(){
+        setMid(0);
+    }
 }
 
 

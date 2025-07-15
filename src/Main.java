@@ -26,11 +26,12 @@ public class Main {
             switch(options){
                 case "1" : {l.SignIn();break;}
                 case "2" : {l.RegisterMember();break;}
-                case "3" : {l.SearchForAnItem();break;}
-                case "4" : {l.RegisterItem();break;}
-                case "5" : {l.ItemLend();break;}
-                case "6" : {l.ItemReturn();break;}
-                case "7" : {l.SearchForCertainMembers();break;}
+                case "3" : {l.logout();}
+                case "4" : {l.SearchForAnItem();break;}
+                case "5" : {l.RegisterItem();break;}
+                case "6" : {l.ItemLend();break;}
+                case "7" : {l.ItemReturn();break;}
+                case "8" : {l.SearchForCertainMembers();break;}
                 case "q" : break;
                 default:
                     System.out.println("Wrong input!");
