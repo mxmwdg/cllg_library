@@ -2,7 +2,7 @@ import java.util.Arrays;
 
 public class Project extends Item {
     int projectYear;
-    String[] team = {"no name members"};
+    String[] team ;
 
 
     Project( String title, int yearOfPublishing, String topic, int projectYear, String[] team) {

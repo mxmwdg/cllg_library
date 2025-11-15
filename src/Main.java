@@ -14,11 +14,12 @@ public class Main {
             System.out.println("Kindly select one of the following options:");
             System.out.println("1.log in");
             System.out.println("2.sign up");
-            System.out.println("3.browse our collection");
-            System.out.println("4.register an item");
-            System.out.println("5.borrow an item");
-            System.out.println("6.return a lent item");
-            System.out.println("7.search for certain members");
+            System.out.println("3.log out");
+            System.out.println("4.browse our collection");
+            System.out.println("5.register an item");
+            System.out.println("6.borrow an item");
+            System.out.println("7.return a lent item");
+            System.out.println("8.search for certain members");
             System.out.println("q. quit");
             System.out.println("============================================");
 
@@ -26,7 +27,7 @@ public class Main {
             switch(options){
                 case "1" : {l.SignIn();break;}
                 case "2" : {l.RegisterMember();break;}
-                case "3" : {l.logout();}
+                case "3" : {l.logout();break;}
                 case "4" : {l.SearchForAnItem();break;}
                 case "5" : {l.RegisterItem();break;}
                 case "6" : {l.ItemLend();break;}

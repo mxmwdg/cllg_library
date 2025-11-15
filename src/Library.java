@@ -142,7 +142,7 @@ public class Library {
                 System.out.println("you have violated our terms and conditions!!");
                 System.out.println("you have been have been removed from the library and all the books you've borrowed will be returned");
                 pMember.removeAll();
-                setMid(0);
+                logout();
             }
         }
         for (Member member : listOfMembers) {
@@ -239,17 +239,17 @@ public class Library {
     }
 
     void SearchForAnItem() {
-        int optionNumber = showItemOptions();
+        String optionNumber = showItemOptions();
         switch (optionNumber) {
             //every book
-            case 1: {
+            case "1": {
                 for (Book book : listOfBooks) {
                     book.getInfo();
                 }
                 break;
             }
             //every project selected by year
-            case 2: {
+            case "2": {
                 System.out.println("Select the year of the projects you want to view: ");
                 int year = in.nextInt();
                 for (Project project : listOfProjects) {
@@ -260,7 +260,7 @@ public class Library {
                 break;
             }
             //every item selected by topics
-            case 3: {
+            case "3": {
                 System.out.println("Select the the topic of the items you want to view : ");
                 System.out.println("1.basic science  2.AI  3.software development  4.networks");
                 int c = in.nextInt();
@@ -268,7 +268,7 @@ public class Library {
                 break;
             }
             //every available project by topic
-            case 4: {
+            case "4": {
                 System.out.println("Select the the topic of the available projects you want to view : ");
                 System.out.println("1.basic science  2.AI  3.software development  4.networks");
                 int c = in.nextInt();
@@ -276,7 +276,7 @@ public class Library {
                 break;
             }
             //every unavailable book / every lent book
-            case 5:{
+            case "5":{
                 for(Book book :listOfBooks){
                     if(!book.IsAvailable()){
                         book.getInfo();
@@ -285,12 +285,12 @@ public class Library {
                 break;
             }
             //search for a certain book or project by id or title or topic
-            case 6:{
+            case "6":{
                 System.out.println("select preferred method of search:");
                 System.out.println("1.id  2.title 3.topic");
-                int c = in.nextInt();
+                String c = in.next();
                 switch (c){
-                    case 1: {
+                    case "1": {
                         System.out.println("enter the id:");
                         int n = in.nextInt();
                         listOfItems.forEach(m -> {
@@ -299,7 +299,7 @@ public class Library {
                         });
                         break;
                     }
-                    case 2: {
+                    case "2": {
                         System.out.println("Enter the title:");
                         in.nextLine();
 
@@ -312,7 +312,7 @@ public class Library {
                         in.reset();
                         break;
                     }
-                    case 3: {
+                    case "3": {
                         System.out.println("Select the the topic of the items you want to view : ");
                         System.out.println("1.basic science  2.AI  3.software development  4.networks");
                         int choice = in.nextInt();
@@ -326,7 +326,7 @@ public class Library {
                 break;
             }
             // Show every item
-            case 7 :{
+            case "7" :{
                 this.ShowAllItems();
                 break;
             }
@@ -338,10 +338,10 @@ public class Library {
     }
 
     void SearchForCertainMembers() {
-        int optionNumber = showMemberOptions();
+        String optionNumber = showMemberOptions();
         switch (optionNumber) {
             //every member and their borrowed items.
-            case 1: {
+            case "1": {
                 for (Member member : listOfMembers) {
                     System.out.println("Member: " + member.getName() + " has borrowed the following titles: ");
                     for (Item borrowedItem : member.BorrowedItems) {
@@ -350,7 +350,7 @@ public class Library {
                     }
                 }
             }
-            case 2: {
+            case "2": {
                 for(Member member : listOfMembers){
                     member.BorrowedItems.forEach(item -> {
                         if (item.topic.equalsIgnoreCase("ai") || item.topic.equalsIgnoreCase("artificial intelligence"))
@@ -362,7 +362,7 @@ public class Library {
             }
 
         //Show All Penalised Members
-            case 3: {
+            case "3": {
                 PenaliseMembers();
                 System.out.println("The penalised members are : ");
                 for(Member member : listOfPenalisedMembers){
@@ -371,7 +371,7 @@ public class Library {
               break;
 
             }
-            case 4 :{
+            case "4" :{
                 System.out.println("Please Enter The Start Date :");
                int x=  in.nextInt();
                int x2=  in.nextInt();
@@ -406,7 +406,7 @@ public class Library {
                 }
                 break;
             }
-            case 5 : {
+            case "5" : {
                 showMembersWithBorrowedBooksAndDate();
                 break;
             }
@@ -466,7 +466,7 @@ public class Library {
             }
         }
     }
-    private int showItemOptions(){
+    private String showItemOptions(){
         System.out.println("1.Every book");
         System.out.println("2.Every project selected by year");
         System.out.println("3.Every item selected by topics");
@@ -474,22 +474,19 @@ public class Library {
         System.out.println("5.Every unavailable book / every lent book");
         System.out.println("6.Search for a certain book or project by id or title or topic");
         System.out.println("7.Show every item");
-        int choice = in.nextInt();
-        if (choice > 0 && choice < 8)
-            return choice;
-        else return 0;
+
+        return in.next();
+
     }
-    private int showMemberOptions() {
+    private String showMemberOptions() {
         System.out.println("1.Every member and their borrowed items.");
         System.out.println("2.Show members that borrowed Ai items. ");
         System.out.println("3.Show All Penalised Members. ");
         System.out.println("4.Show all borrowed items in selected duration. ");
         System.out.println("5.Show Members With Borrowed Books And Date. ");
 
-        int choice = in.nextInt();
-        if (choice > 0 && choice < 8)
-            return choice;
-        else return 0;
+        return in.next();
+
     }
     void ShowAllItems(){
         listOfItems.forEach(Item::getInfo);
@@ -595,6 +592,7 @@ public class Library {
     }
     void logout(){
         setMid(0);
+        System.out.println("you have been logged out!");
     }
 }
 
