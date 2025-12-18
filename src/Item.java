@@ -1,7 +1,64 @@
-abstract public class Item {
-    int id;
-    String title;
-    int yearOfPublishing;
-    String topic;
+public abstract class Item {
+    private static int count = 0;
+    protected String title;
+    protected int id;
+    protected int yearOfPublishing;
+    protected String topic;
+    protected boolean available;
+
+
+
+    public Item(String title,int yearOfPublishing,String topic,int typeNum) {
+        this.title = title;
+        this.yearOfPublishing = yearOfPublishing;
+        this.topic = topic;
+        this.available = true;
+        count = count + 1;
+        if(topic.equalsIgnoreCase("basic science") || topic.equalsIgnoreCase("science"))
+            this.id = id + 100 + count + typeNum;
+        else if(topic.equalsIgnoreCase("ai")|| topic.equalsIgnoreCase("artificial intelligence"))
+            this.id = id + 300 + count + typeNum;
+        else if(topic.equalsIgnoreCase("software development")|| topic.equalsIgnoreCase("software"))
+            this.id = id + 500 + count + typeNum;
+        else if (topic.equalsIgnoreCase("networks"))
+            this.id = id + 700 + count + typeNum;
+        else
+            this.id = id + 900 + count + typeNum;
+    }
+
+    public void setTitle(String title) {
+        this.title=title;
+    }
+
+    abstract public int getId();
+
+
+    abstract void Return();
+    abstract void borrow();
+
+    public boolean IsAvailable() {
+        return this.available;
+    }
+    public void setAvailable(boolean t){
+        this.available = t;
+    }
+    public void setAvailable(){
+        this.available = true;
+    }
+
+    abstract void getInfo();
+
+
+    @Override
+    public String toString() {
+        return " *title = " + title +
+                "\n *yearOfPublishing = " + yearOfPublishing +
+                "\n *topic =" + topic +
+                "\n *available = " + available +
+                "\n *id = " + id + "\n";
+
+    }
+
 
 }
+
